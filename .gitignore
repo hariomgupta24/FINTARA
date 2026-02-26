@@ -1,8 +1,43 @@
+# Dependencies
 node_modules/
+
+# Database files
 *.db
 *.db-shm
 *.db-wal
-predrafts/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# Environment variables
 .env
+
+# Generated drafts
+predrafts/
+
+# SWIFT generated outbox
+swift_generator/outbox/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
