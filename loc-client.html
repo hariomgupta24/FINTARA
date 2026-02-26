@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barclays — Letter of Credit Application</title>
+    <meta name="description"
+        content="Apply for a Letter of Credit with Barclays Bank. Upload your PDF application or fill in the form directly." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="loc-client.css" />
+</head>
+
+<body>
+
+    <!-- ===== Top Nav ===== -->
+    <nav class="topnav">
+        <div class="topnav-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="#00AEEF" opacity="0.15" />
+                    <path fill="currentColor"
+                        d="M20 5 C16.5 5 13.5 7 12 10 C10.5 8.5 8.5 8 6.5 9 C4.5 10 3.5 12 4 14 C2 13 0.5 14 0.5 16 C0.5 18 2 19.5 4 19 C4 21 5.5 23 7.5 24 C9.5 25 11.5 24 12.5 22.5 C13.5 25.5 16 27.5 19 28 L19 34 L17 34 C17 35 17.5 35.5 18 35.5 L22 35.5 C22.5 35.5 23 35 23 34 L21 34 L21 28 C24 27.5 26.5 25.5 27.5 22.5 C28.5 24 30.5 25 32.5 24 C34.5 23 36 21 36 19 C38 19.5 39.5 18 39.5 16 C39.5 14 38 13 36 14 C36.5 12 35.5 10 33.5 9 C31.5 8 29.5 8.5 28 10 C26.5 7 23.5 5 20 5Z"
+                        transform="scale(0.52) translate(5,3)" />
+                </svg>
+            </div>
+            <span class="brand-text">Barclays <span class="brand-ai">Trade Finance</span></span>
+        </div>
+        <div class="topnav-right">
+            <a href="index.html" class="nav-back-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <path d="M19 12H5M12 5l-7 7 7 7" />
+                </svg>
+                Back to AI Assistant
+            </a>
+            <a href="loc-officer.html" class="nav-officer-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <path d="M8 21h8M12 17v4" />
+                </svg>
+                Officer Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== Main Layout ===== -->
+    <div class="loc-layout">
+
+        <!-- Sidebar Steps -->
+        <aside class="steps-sidebar">
+            <div class="steps-header">
+                <h2>LC Application</h2>
+                <p>Complete all sections to submit your Letter of Credit request</p>
+            </div>
+            <ol class="steps-list" id="stepList">
+                <li class="step-item active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <div class="step-info">
+                        <span class="step-title">Applicant Details</span>
+                        <span class="step-desc">Your company information</span>
+                    </div>
+                </li>
+                <li class="step-item" data-step="2">
+                    <div class="step-circle">2</div>
+                    <div class="step-info">
+                        <span class="step-title">Beneficiary Details</span>
+                        <span class="step-desc">Supplier / exporter info</span>
+                    </div>
+                </li>
+                <li class="step-item" data-step="3">
+                    <div class="step-circle">3</div>
+                    <div class="step-info">
+                        <span class="step-title">LC Details</span>
+                        <span class="step-desc">Type, amount & expiry</span>
+                    </div>
+                </li>
+                <li class="step-item" data-step="4">
+                    <div class="step-circle">4</div>
+                    <div class="step-info">
+                        <span class="step-title">Shipment Details</span>
+                        <span class="step-desc">Ports, goods & incoterms</span>
+                    </div>
+                </li>
+                <li class="step-item" data-step="5">
+                    <div class="step-circle">5</div>
+                    <div class="step-info">
+                        <span class="step-title">Documents Required</span>
+                        <span class="step-desc">Required document list</span>
+                    </div>
+                </li>
+                <li class="step-item" data-step="6">
+                    <div class="step-circle">6</div>
+                    <div class="step-info">
+                        <span class="step-title">Bank & Payment</span>
+                        <span class="step-desc">Bank details & terms</span>
+                    </div>
+                </li>
+                <li class="step-item" data-step="7">
+                    <div class="step-circle">7</div>
+                    <div class="step-info">
+                        <span class="step-title">Credit Assessment</span>
+                        <span class="step-desc">Collateral & creditworthiness</span>
+                    </div>
+                </li>
+                <li class="step-item" data-step="8">
+                    <div class="step-circle">8</div>
+                    <div class="step-info">
+                        <span class="step-title">Review & Submit</span>
+                        <span class="step-desc">Final review</span>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="progress-box">
+                <div class="progress-label">
+                    <span>Progress</span>
+                    <span id="progressPct">12%</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progressFill" style="width:12%"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="loc-main">
+
+            <!-- OCR Upload Banner -->
+            <div class="ocr-banner" id="ocrBanner">
+                <div class="ocr-banner-left">
+                    <div class="ocr-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                            <polyline points="10 9 9 9 8 9" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Have an existing LC Application PDF?</h3>
+                        <p>Upload it and our AI will automatically extract all key fields for you.</p>
+                    </div>
+                </div>
+                <div class="ocr-upload-area" id="ocrUploadArea">
+                    <input type="file" id="pdfUpload" accept=".pdf,image/*" hidden />
+                    <button class="ocr-upload-btn" id="ocrUploadBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        Upload PDF / Image
+                    </button>
+                    <span class="ocr-hint">PDF, JPG, PNG supported</span>
+                </div>
+            </div>
+
+            <!-- OCR Processing Overlay -->
+            <div class="ocr-processing" id="ocrProcessing" style="display:none">
+                <div class="ocr-spinner"></div>
+                <div class="ocr-processing-text">
+                    <h4 id="ocrStatusTitle">Reading your document…</h4>
+                    <p id="ocrStatusDesc">Please wait while our AI extracts information from your PDF.</p>
+                </div>
+                <div class="ocr-progress-track">
+                    <div class="ocr-progress-fill" id="ocrProgressFill"></div>
+                </div>
+            </div>
+
+            <!-- OCR Result Toast -->
+            <div class="ocr-toast" id="ocrToast" style="display:none">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span id="ocrToastMsg">Fields auto-populated from your PDF!</span>
+                <button id="ocrToastClose">✕</button>
+            </div>
+
+            <!-- ===== Step 1: Applicant Details ===== -->
+            <section class="form-section active" id="step1">
+                <div class="section-header">
+                    <div class="section-badge">Step 1 of 8</div>
+                    <h2>Applicant Details</h2>
+                    <p>Provide your company or personal information as the LC applicant (buyer).</p>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label for="applicantName">Applicant Name / Company Name <span class="req">*</span></label>
+                        <input type="text" id="applicantName" placeholder="e.g. Infosys Technologies Ltd." />
+                    </div>
+                    <div class="form-group span-2">
+                        <label for="applicantAddress">Registered Address <span class="req">*</span></label>
+                        <textarea id="applicantAddress" rows="2"
+                            placeholder="Full registered office address"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicantCity">City <span class="req">*</span></label>
+                        <input type="text" id="applicantCity" placeholder="e.g. Mumbai" />
+                    </div>
+                    <div class="form-group">
+                        <label for="applicantCountry">Country <span class="req">*</span></label>
+                        <select id="applicantCountry">
+                            <option value="">Select country</option>
+                            <option value="India" selected>India</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="USA">United States</option>
+                            <option value="UAE">UAE</option>
+                            <option value="Germany">Germany</option>
+                            <option value="China">China</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicantAccount">Bank Account Number <span class="req">*</span></label>
+                        <input type="text" id="applicantAccount" placeholder="e.g. 55001234567890" />
+                    </div>
+                    <div class="form-group">
+                        <label for="applicantGST">GST / Tax ID Number</label>
+                        <input type="text" id="applicantGST" placeholder="e.g. 27AAPFU0939F1ZV" />
+                    </div>
+                    <div class="form-group">
+                        <label for="applicantPhone">Contact Phone <span class="req">*</span></label>
+                        <input type="tel" id="applicantPhone" placeholder="+91 XXXXX XXXXX" />
+                    </div>
+                    <div class="form-group">
+                        <label for="applicantEmail">Contact Email <span class="req">*</span></label>
+                        <input type="email" id="applicantEmail" placeholder="finance@company.com" />
+                    </div>
+                    <div class="form-group span-2">
+                        <label for="applicantType">Client Status</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="clientStatus" value="existing" checked />
+                                <span class="radio-custom"></span>
+                                Existing Barclays Client
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="clientStatus" value="new" />
+                                <span class="radio-custom"></span>
+                                New Client (KYC required)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== Step 2: Beneficiary Details ===== -->
+            <section class="form-section" id="step2">
+                <div class="section-header">
+                    <div class="section-badge">Step 2 of 8</div>
+                    <h2>Beneficiary Details</h2>
+                    <p>Information about the exporter/supplier who will receive payment under this LC.</p>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label for="beneficiaryName">Beneficiary Name / Company <span class="req">*</span></label>
+                        <input type="text" id="beneficiaryName" placeholder="e.g. XYZ Exports GmbH" />
+                    </div>
+                    <div class="form-group span-2">
+                        <label for="beneficiaryAddress">Beneficiary Address <span class="req">*</span></label>
+                        <textarea id="beneficiaryAddress" rows="2" placeholder="Full address of beneficiary"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiaryCity">City</label>
+                        <input type="text" id="beneficiaryCity" placeholder="e.g. Hamburg" />
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiaryCountry">Country <span class="req">*</span></label>
+                        <select id="beneficiaryCountry">
+                            <option value="">Select country</option>
+                            <option value="Germany">Germany</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="USA">United States</option>
+                            <option value="China">China</option>
+                            <option value="Japan">Japan</option>
+                            <option value="UAE">UAE</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="India">India</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiaryBankName">Beneficiary's Bank Name <span class="req">*</span></label>
+                        <input type="text" id="beneficiaryBankName" placeholder="e.g. Deutsche Bank AG" />
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiarySwift">SWIFT / BIC Code <span class="req">*</span></label>
+                        <input type="text" id="beneficiarySwift" placeholder="e.g. DEUTDEFF" maxlength="11"
+                            style="text-transform:uppercase;" />
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiaryIBAN">IBAN / Account Number</label>
+                        <input type="text" id="beneficiaryIBAN" placeholder="e.g. DE89 3704 0044 0532 0130 00" />
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiaryEmail">Beneficiary Email</label>
+                        <input type="email" id="beneficiaryEmail" placeholder="supplier@company.com" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== Step 3: LC Details ===== -->
+            <section class="form-section" id="step3">
+                <div class="section-header">
+                    <div class="section-badge">Step 3 of 8</div>
+                    <h2>Letter of Credit Details</h2>
+                    <p>Define the type, amount, currency and validity of the LC.</p>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label>LC Type <span class="req">*</span></label>
+                        <div class="lc-type-cards" id="lcTypeCards">
+                            <div class="lc-type-card active" data-type="Sight">
+                                <div class="lc-type-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg></div>
+                                <div class="lc-type-name">Sight LC</div>
+                                <div class="lc-type-desc">Payment upon presentation of compliant documents</div>
+                            </div>
+                            <div class="lc-type-card" data-type="Usance">
+                                <div class="lc-type-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg></div>
+                                <div class="lc-type-name">Usance LC</div>
+                                <div class="lc-type-desc">Deferred payment (30, 60, 90 days)</div>
+                            </div>
+                            <div class="lc-type-card" data-type="Revolving">
+                                <div class="lc-type-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="23 4 23 10 17 10" />
+                                        <polyline points="1 20 1 14 7 14" />
+                                        <path
+                                            d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                                    </svg></div>
+                                <div class="lc-type-name">Revolving LC</div>
+                                <div class="lc-type-desc">Automatically reinstated for multiple shipments</div>
+                            </div>
+                            <div class="lc-type-card" data-type="Standby">
+                                <div class="lc-type-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                    </svg></div>
+                                <div class="lc-type-name">Standby LC</div>
+                                <div class="lc-type-desc">Used as guarantee, drawn only on default</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="lcType" value="Sight" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lcCurrency">Currency <span class="req">*</span></label>
+                        <select id="lcCurrency">
+                            <option value="USD">USD — US Dollar</option>
+                            <option value="EUR">EUR — Euro</option>
+                            <option value="GBP" selected>GBP — British Pound</option>
+                            <option value="INR">INR — Indian Rupee</option>
+                            <option value="JPY">JPY — Japanese Yen</option>
+                            <option value="AED">AED — UAE Dirham</option>
+                            <option value="SGD">SGD — Singapore Dollar</option>
+                            <option value="CNY">CNY — Chinese Yuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lcAmount">LC Amount <span class="req">*</span></label>
+                        <div class="input-with-prefix">
+                            <span class="input-prefix" id="currencySymbol">£</span>
+                            <input type="number" id="lcAmount" placeholder="0.00" min="1000" step="0.01" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lcExpiryDate">Expiry Date <span class="req">*</span></label>
+                        <input type="date" id="lcExpiryDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lcExpiryPlace">Place of Expiry <span class="req">*</span></label>
+                        <input type="text" id="lcExpiryPlace" placeholder="e.g. Hamburg, Germany" />
+                    </div>
+                    <div class="form-group">
+                        <label>Partial Shipments <span class="req">*</span></label>
+                        <div class="toggle-group">
+                            <label class="toggle-option active" data-val="Yes" id="partialYes">✓ Allowed</label>
+                            <label class="toggle-option" data-val="No" id="partialNo">✗ Not Allowed</label>
+                        </div>
+                        <input type="hidden" id="partialShipments" value="Yes" />
+                    </div>
+                    <div class="form-group">
+                        <label>Transhipment <span class="req">*</span></label>
+                        <div class="toggle-group">
+                            <label class="toggle-option active" data-val="Yes" id="transhipYes">✓ Allowed</label>
+                            <label class="toggle-option" data-val="No" id="transhipNo">✗ Not Allowed</label>
+                        </div>
+                        <input type="hidden" id="transhipment" value="Yes" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tolerancePct">Amount Tolerance %</label>
+                        <div class="input-with-suffix">
+                            <input type="number" id="tolerancePct" placeholder="5" min="0" max="10" value="5" />
+                            <span class="input-suffix">%</span>
+                        </div>
+                        <small>Typically ±5%. Tolerance range allows slight variation in amount.</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== Step 4: Shipment Details ===== -->
+            <section class="form-section" id="step4">
+                <div class="section-header">
+                    <div class="section-badge">Step 4 of 8</div>
+                    <h2>Shipment Details</h2>
+                    <p>Provide the shipping and goods details for the LC transaction.</p>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="portLoading">Port of Loading <span class="req">*</span></label>
+                        <input type="text" id="portLoading" placeholder="e.g. Hamburg Port, Germany" />
+                    </div>
+                    <div class="form-group">
+                        <label for="portDischarge">Port of Discharge <span class="req">*</span></label>
+                        <input type="text" id="portDischarge" placeholder="e.g. JNPT, Mumbai, India" />
+                    </div>
+                    <div class="form-group">
+                        <label for="latestShipDate">Latest Shipment Date <span class="req">*</span></label>
+                        <input type="date" id="latestShipDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="incoterms">Incoterms <span class="req">*</span></label>
+                        <select id="incoterms">
+                            <option value="">Select Incoterm</option>
+                            <option value="FOB">FOB — Free On Board</option>
+                            <option value="CIF">CIF — Cost, Insurance & Freight</option>
+                            <option value="CFR">CFR — Cost and Freight</option>
+                            <option value="EXW">EXW — Ex Works</option>
+                            <option value="DAP">DAP — Delivered At Place</option>
+                            <option value="DDP">DDP — Delivered Duty Paid</option>
+                            <option value="FCA">FCA — Free Carrier</option>
+                            <option value="CPT">CPT — Carriage Paid To</option>
+                        </select>
+                    </div>
+                    <div class="form-group span-2">
+                        <label for="goodsDesc">Description of Goods <span class="req">*</span></label>
+                        <textarea id="goodsDesc" rows="3"
+                            placeholder="e.g. Industrial machinery parts — CNC lathe machines (Model: XL-500) as per Purchase Order No. PO-2024-0891"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity <span class="req">*</span></label>
+                        <input type="text" id="quantity" placeholder="e.g. 50 Units" />
+                    </div>
+                    <div class="form-group">
+                        <label for="unitPrice">Unit Price</label>
+                        <input type="text" id="unitPrice" placeholder="e.g. £12,500 per unit" />
+                    </div>
+                    <div class="form-group">
+                        <label for="hsCode">HS Code (Harmonized System)</label>
+                        <input type="text" id="hsCode" placeholder="e.g. 8457.10" />
+                    </div>
+                    <div class="form-group">
+                        <label for="countryOrigin">Country of Origin</label>
+                        <input type="text" id="countryOrigin" placeholder="e.g. Germany" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== Step 5: Documents Required ===== -->
+            <section class="form-section" id="step5">
+                <div class="section-header">
+                    <div class="section-badge">Step 5 of 8</div>
+                    <h2>Document Requirements</h2>
+                    <p>Select the documents required to be presented under this LC for payment.</p>
+                </div>
+                <div class="docs-grid">
+                    <label class="doc-checkbox checked" id="docCI">
+                        <input type="checkbox" name="docs" value="Commercial Invoice" checked />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Commercial Invoice</span>
+                                <span class="doc-desc">Seller's invoice showing transaction details</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="doc-checkbox checked" id="docBL">
+                        <input type="checkbox" name="docs" value="Bill of Lading" checked />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Bill of Lading / Airway Bill</span>
+                                <span class="doc-desc">Shipping carrier's receipt for goods</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="doc-checkbox checked" id="docPL">
+                        <input type="checkbox" name="docs" value="Packing List" checked />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Packing List</span>
+                                <span class="doc-desc">Detailed list of shipment contents</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="doc-checkbox checked" id="docCO">
+                        <input type="checkbox" name="docs" value="Certificate of Origin" checked />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Certificate of Origin</span>
+                                <span class="doc-desc">Certified document of goods' country of origin</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="doc-checkbox" id="docIns">
+                        <input type="checkbox" name="docs" value="Insurance Certificate" />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Insurance Certificate</span>
+                                <span class="doc-desc">Marine/cargo insurance policy</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="doc-checkbox" id="docInsp">
+                        <input type="checkbox" name="docs" value="Inspection Certificate" />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Inspection Certificate</span>
+                                <span class="doc-desc">Third-party quality inspection report</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="doc-checkbox" id="docWT">
+                        <input type="checkbox" name="docs" value="Weight/Measurement Certificate" />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Weight / Measurement Certificate</span>
+                                <span class="doc-desc">Certified weight and dimension document</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="doc-checkbox" id="docPH">
+                        <input type="checkbox" name="docs" value="Phytosanitary Certificate" />
+                        <div class="doc-checkbox-inner">
+                            <span class="doc-check-icon">✓</span>
+                            <div class="doc-check-content">
+                                <span class="doc-name">Phytosanitary Certificate</span>
+                                <span class="doc-desc">Required for agricultural/plant-based goods</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    <label for="additionalDocs">Additional Custom Documents</label>
+                    <textarea id="additionalDocs" rows="2"
+                        placeholder="Specify any other required documents…"></textarea>
+                </div>
+            </section>
+
+            <!-- ===== Step 6: Bank & Payment Terms ===== -->
+            <section class="form-section" id="step6">
+                <div class="section-header">
+                    <div class="section-badge">Step 6 of 8</div>
+                    <h2>Bank Details & Payment Terms</h2>
+                    <p>Specify the bank parties and payment conditions for this LC.</p>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="issuingBank">Issuing Bank <span class="req">*</span></label>
+                        <input type="text" id="issuingBank" value="Barclays Bank PLC, India" readonly
+                            class="readonly-field" />
+                    </div>
+                    <div class="form-group">
+                        <label for="advisingBank">Advising Bank <span class="req">*</span></label>
+                        <input type="text" id="advisingBank" placeholder="e.g. Deutsche Bank AG, Frankfurt" />
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmingBank">Confirming Bank (if required)</label>
+                        <input type="text" id="confirmingBank" placeholder="Leave blank if not required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="negotiatingBank">Negotiating Bank</label>
+                        <input type="text" id="negotiatingBank" placeholder="e.g. HSBC, Hamburg" />
+                    </div>
+                    <div class="form-group span-2">
+                        <label>Payment Terms <span class="req">*</span></label>
+                        <div class="payment-terms-cards" id="paymentTermsCards">
+                            <div class="payment-card active" data-term="At Sight">
+                                <div class="payment-card-title">At Sight</div>
+                                <div class="payment-card-desc">Payment upon document presentation</div>
+                            </div>
+                            <div class="payment-card" data-term="30 Days">
+                                <div class="payment-card-title">30 Days</div>
+                                <div class="payment-card-desc">Deferred 30 days from B/L date</div>
+                            </div>
+                            <div class="payment-card" data-term="60 Days">
+                                <div class="payment-card-title">60 Days</div>
+                                <div class="payment-card-desc">Deferred 60 days from B/L date</div>
+                            </div>
+                            <div class="payment-card" data-term="90 Days">
+                                <div class="payment-card-title">90 Days</div>
+                                <div class="payment-card-desc">Deferred 90 days from B/L date</div>
+                            </div>
+                            <div class="payment-card" data-term="180 Days">
+                                <div class="payment-card-title">180 Days</div>
+                                <div class="payment-card-desc">Deferred 180 days from B/L date</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="paymentTerms" value="At Sight" />
+                    </div>
+                    <div class="form-group span-2">
+                        <label for="specialInstructions">Special Instructions / Additional Clauses</label>
+                        <textarea id="specialInstructions" rows="3"
+                            placeholder="Any specific conditions, inspection requirements, or clauses to be included in the LC…"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== Step 7: Credit Assessment & Collateral ===== -->
+            <section class="form-section" id="step7">
+                <div class="section-header">
+                    <div class="section-badge">Step 7 of 8</div>
+                    <h2>Credit Assessment &amp; Collateral</h2>
+                    <p>Provide financial information and mandatory collateral details for STP processing.</p>
+                </div>
+
+                <div class="credit-info-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <p>Collateral details are <strong>mandatory</strong> for STP (Straight-Through Processing).
+                        Providing structured collateral information enables automated eligibility assessment and faster
+                        LC issuance.</p>
+                </div>
+
+                <!-- Basic Financials -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="annualTurnover">Annual Turnover (INR Crore)</label>
+                        <input type="number" id="annualTurnover" placeholder="e.g. 250" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="yearsInBusiness">Years in Business</label>
+                        <input type="number" id="yearsInBusiness" placeholder="e.g. 12" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="creditScore">CIBIL / Credit Score <span class="req">*</span></label>
+                        <input type="number" id="creditScore" placeholder="e.g. 780" min="300" max="900" />
+                    </div>
+                    <div class="form-group">
+                        <label for="existingBankLimit">Existing Bank Limit (INR Crore)</label>
+                        <input type="number" id="existingBankLimit" placeholder="e.g. 100" min="0" />
+                    </div>
+                </div>
+
+                <!-- Primary Collateral Type Selector -->
+                <div class="collateral-section-header">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" />
+                        <path d="M16 7V5a2 2 0 0 0-4 0v2M12 12v4" />
+                    </svg>
+                    <h3>Collateral Details <span class="stp-badge">STP MANDATORY</span></h3>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group span-2">
+                        <label>Primary Collateral Type <span class="req">*</span></label>
+                        <div class="collateral-primary-cards" id="collateralPrimaryCards">
+                            <div class="collateral-primary-card" data-type="FD">
+                                <div class="cp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" />
+                                        <line x1="1" y1="10" x2="23" y2="10" />
+                                    </svg></div>
+                                <div class="cp-name">Fixed Deposit</div>
+                                <div class="cp-haircut">0% Haircut</div>
+                            </div>
+                            <div class="collateral-primary-card" data-type="GOVT_BOND">
+                                <div class="cp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                        <line x1="16" y1="13" x2="8" y2="13" />
+                                        <line x1="16" y1="17" x2="8" y2="17" />
+                                    </svg></div>
+                                <div class="cp-name">Govt. Bond / Securities</div>
+                                <div class="cp-haircut">10% Haircut</div>
+                            </div>
+                            <div class="collateral-primary-card" data-type="LIQUID_SECURITY">
+                                <div class="cp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                                    </svg></div>
+                                <div class="cp-name">Liquid Equity / Shares</div>
+                                <div class="cp-haircut">15% Haircut</div>
+                            </div>
+                            <div class="collateral-primary-card" data-type="CASH">
+                                <div class="cp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="12" y1="1" x2="12" y2="23" />
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                    </svg></div>
+                                <div class="cp-name">Cash Margin</div>
+                                <div class="cp-haircut">0% Haircut</div>
+                            </div>
+                            <div class="collateral-primary-card" data-type="PROPERTY">
+                                <div class="cp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                        <polyline points="9 22 9 12 15 12 15 22" />
+                                    </svg></div>
+                                <div class="cp-name">Property / Land</div>
+                                <div class="cp-haircut">40% Haircut</div>
+                            </div>
+                            <div class="collateral-primary-card" data-type="NONE">
+                                <div class="cp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg></div>
+                                <div class="cp-name">Clean LC (No Collateral)</div>
+                                <div class="cp-haircut">Based on credit</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="collateralPrimaryType" value="NONE" />
+                    </div>
+                </div>
+
+                <!-- FD Sub-Form -->
+                <div class="collateral-subform" id="fdSubForm" style="display:none;">
+                    <div class="subform-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                        </svg>
+                        Fixed Deposit Details
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fdNumber">FD Certificate Number <span class="req">*</span></label>
+                            <input type="text" id="fdNumber" placeholder="e.g. FD/SBI/2024/001234" />
+                        </div>
+                        <div class="form-group">
+                            <label for="fdBank">Issuing Bank <span class="req">*</span></label>
+                            <input type="text" id="fdBank" placeholder="e.g. State Bank of India" />
+                        </div>
+                        <div class="form-group">
+                            <label for="fdAmount">FD Amount (Crore) <span class="req">*</span></label>
+                            <input type="number" id="fdAmount" placeholder="e.g. 15.5" min="0" step="0.01" />
+                        </div>
+                        <div class="form-group">
+                            <label for="fdCurrency">Currency</label>
+                            <select id="fdCurrency">
+                                <option value="INR">INR — Indian Rupee</option>
+                                <option value="USD">USD — US Dollar</option>
+                                <option value="EUR">EUR — Euro</option>
+                                <option value="GBP">GBP — British Pound</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fdMaturityDate">Maturity Date <span class="req">*</span></label>
+                            <input type="date" id="fdMaturityDate" />
+                        </div>
+                        <div class="form-group">
+                            <label>Lien Marked in Favour of Barclays <span class="req">*</span></label>
+                            <div class="toggle-group">
+                                <label class="toggle-option active" id="fdLienYes">✓ Yes — Lien Marked</label>
+                                <label class="toggle-option" id="fdLienNo">✗ No</label>
+                            </div>
+                            <input type="hidden" id="fdLienMarked" value="Yes" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Securities Sub-Form -->
+                <div class="collateral-subform" id="secSubForm" style="display:none;">
+                    <div class="subform-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                        Securities / Bond Details
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="secISIN">ISIN / Security Identifier <span class="req">*</span></label>
+                            <input type="text" id="secISIN" placeholder="e.g. IN0020180066"
+                                style="text-transform:uppercase;" />
+                        </div>
+                        <div class="form-group">
+                            <label for="secIssuer">Issuer Name <span class="req">*</span></label>
+                            <input type="text" id="secIssuer" placeholder="e.g. Government of India" />
+                        </div>
+                        <div class="form-group">
+                            <label for="secMarketValue">Current Market Value (Crore) <span class="req">*</span></label>
+                            <input type="number" id="secMarketValue" placeholder="e.g. 25.0" min="0" step="0.01" />
+                        </div>
+                        <div class="form-group">
+                            <label for="secQuantity">Quantity / Units</label>
+                            <input type="text" id="secQuantity" placeholder="e.g. 5,000 units" />
+                        </div>
+                        <div class="form-group">
+                            <label for="secCustodian">Custodian Details</label>
+                            <input type="text" id="secCustodian" placeholder="e.g. NSDL / CDSL" />
+                        </div>
+                        <div class="form-group">
+                            <label for="secVolatility">Volatility Category</label>
+                            <select id="secVolatility">
+                                <option value="Low">Low (Gilt/Bonds)</option>
+                                <option value="Medium">Medium (Blue-chip equity)</option>
+                                <option value="High">High (Mid/Small cap)</option>
+                            </select>
+                        </div>
+                        <div class="form-group span-2">
+                            <label>Pledge Status</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option active" id="secPledgedYes">✓ Pledged to Barclays</label>
+                                <label class="toggle-option" id="secPledgedNo">✗ Not Yet Pledged</label>
+                            </div>
+                            <input type="hidden" id="secPledged" value="Yes" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cash Margin Sub-Form -->
+                <div class="collateral-subform" id="cashSubForm" style="display:none;">
+                    <div class="subform-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23" />
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                        Cash Margin Details
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="cashMarginAmount">Cash Margin Amount (Crore) <span class="req">*</span></label>
+                            <input type="number" id="cashMarginAmount" placeholder="e.g. 10.0" min="0" step="0.01" />
+                        </div>
+                        <div class="form-group">
+                            <label>Legacy Collateral Checkboxes</label>
+                            <div class="collateral-types" style="margin-top:6px;">
+                                <label class="collateral-option"><input type="checkbox" name="collateral"
+                                        value="Fixed Deposit" /><span class="collateral-custom"></span>Fixed
+                                    Deposit</label>
+                                <label class="collateral-option"><input type="checkbox" name="collateral"
+                                        value="Property" /><span class="collateral-custom"></span>Property</label>
+                                <label class="collateral-option"><input type="checkbox" name="collateral"
+                                        value="Stocks/Shares" /><span
+                                        class="collateral-custom"></span>Stocks/Shares</label>
+                                <label class="collateral-option"><input type="checkbox" name="collateral"
+                                        value="Machinery" /><span class="collateral-custom"></span>Machinery</label>
+                                <label class="collateral-option"><input type="checkbox" name="collateral"
+                                        value="Receivables" /><span class="collateral-custom"></span>Receivables</label>
+                                <label class="collateral-option"><input type="checkbox" name="collateral"
+                                        value="None" /><span class="collateral-custom"></span>None</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-grid" style="margin-top:16px;">
+                    <div class="form-group">
+                        <label for="collateralValue">Estimated Total Collateral Value (INR Crore)</label>
+                        <input type="number" id="collateralValue" placeholder="e.g. 75" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentAgreement">Agreed Payment Date</label>
+                        <input type="date" id="paymentAgreement" />
+                    </div>
+                    <div class="form-group span-2">
+                        <label for="financialDocs">Upload Financial Statement (optional)</label>
+                        <div class="file-upload-box" id="finDocsBox">
+                            <input type="file" id="financialDocs" accept=".pdf,.xlsx,.csv" hidden />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            <span>Click to upload or drag &amp; drop</span>
+                            <small>Annual reports, audited financials, balance sheet (PDF/Excel)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Score Preview -->
+                <div class="credit-score-preview" id="creditScorePreview">
+                    <h4>AI Credit Assessment Preview</h4>
+                    <div class="credit-meter-wrap">
+                        <div class="credit-meter">
+                            <div class="credit-arc"></div>
+                            <div class="credit-needle" id="creditNeedle"></div>
+                            <div class="credit-score-val" id="creditScoreDisplay">—</div>
+                            <div class="credit-score-label">Score</div>
+                        </div>
+                        <div class="credit-breakdown">
+                            <div class="credit-bar-item">
+                                <span>Turnover</span>
+                                <div class="mini-bar">
+                                    <div class="mini-fill" id="barTurnover" style="width:0%"></div>
+                                </div>
+                                <span class="mini-score" id="scoreTurnover">-</span>
+                            </div>
+                            <div class="credit-bar-item">
+                                <span>Credit Score</span>
+                                <div class="mini-bar">
+                                    <div class="mini-fill" id="barCredit" style="width:0%"></div>
+                                </div>
+                                <span class="mini-score" id="scoreCredit">-</span>
+                            </div>
+                            <div class="credit-bar-item">
+                                <span>Years in Business</span>
+                                <div class="mini-bar">
+                                    <div class="mini-fill" id="barYears" style="width:0%"></div>
+                                </div>
+                                <span class="mini-score" id="scoreYears">-</span>
+                            </div>
+                            <div class="credit-bar-item">
+                                <span>Collateral</span>
+                                <div class="mini-bar">
+                                    <div class="mini-fill" id="barCollateral" style="width:0%"></div>
+                                </div>
+                                <span class="mini-score" id="scoreCollateral">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="credit-recommendation" id="creditRecommendation"></div>
+                </div>
+            </section>
+
+            <!-- ===== Step 8: Review & Submit ===== -->
+            <section class="form-section" id="step8">
+                <div class="section-header">
+                    <div class="section-badge">Step 8 of 8</div>
+                    <h2>Review & Submit</h2>
+                    <p>Please review all your information before submitting your LC application to Barclays.</p>
+                </div>
+                <div class="review-grid" id="reviewGrid">
+                    <!-- populated by JS -->
+                </div>
+                <div class="declaration-box">
+                    <label class="declaration-check">
+                        <input type="checkbox" id="declarationCheck" />
+                        <span class="declaration-custom"></span>
+                        <span>I declare that all information provided is accurate and true. I authorise Barclays Bank
+                            PLC to verify the information and process this LC application as per the terms and
+                            conditions of Barclays Trade Finance services. I understand that providing false information
+                            may result in rejection and legal action.</span>
+                    </label>
+                </div>
+                <div class="submit-area">
+                    <button class="submit-btn" id="submitBtn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 2L11 13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                        Submit LC Application
+                    </button>
+                    <p class="submit-note">You will receive a confirmation email and a reference number upon submission.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ===== Submit Success ===== -->
+            <section class="form-section" id="stepSuccess" style="display:none;">
+                <div class="success-container">
+                    <div class="success-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </div>
+                    <h2>Application Submitted Successfully!</h2>
+                    <p>Your Letter of Credit application has been received by Barclays Trade Finance team.</p>
+                    <div class="ref-box">
+                        <span class="ref-label">Reference Number</span>
+                        <span class="ref-number" id="refNumber">BRC-LC-2024-0000</span>
+                    </div>
+                    <div class="success-steps">
+                        <div class="success-step">
+                            <div class="ss-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg></div>
+                            <div>Confirmation email sent to your registered email address</div>
+                        </div>
+                        <div class="success-step">
+                            <div class="ss-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                </svg></div>
+                            <div>Our Trade Finance team will review your application within 2-3 business days</div>
+                        </div>
+                        <div class="success-step">
+                            <div class="ss-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.64 12.5 19.79 19.79 0 0 1 1.58 3.9 2 2 0 0 1 3.55 1.72h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.4a16 16 0 0 0 6.29 6.29l.87-.87a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                </svg></div>
+                            <div>A relationship manager will contact you for any additional information</div>
+                        </div>
+                    </div>
+                    <div class="success-actions">
+                        <a href="loc-officer.html" class="btn-primary">View in Officer Dashboard</a>
+                        <a href="loc-client.html" class="btn-secondary">Submit Another Application</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Buttons -->
+            <div class="form-nav" id="formNav">
+                <button class="btn-prev" id="prevBtn" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                    Previous
+                </button>
+                <div class="step-counter" id="stepCounter">Step 1 of 8</div>
+                <button class="btn-next" id="nextBtn">
+                    Next
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Tesseract.js OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <!-- PDF.js -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    <script src="loc-client.js"></script>
+</body>
+
+</html>

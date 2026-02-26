@@ -1,0 +1,54 @@
+{
+    "message_type": "MT700",
+    "lc_number": "BRC/LC/2025/0001",
+    "issue_date": "2025-02-24",
+    "expiry_date": "2025-08-24",
+    "expiry_place": "LONDON",
+    "applicant": {
+        "name": "Sunrise Exports Pvt Ltd",
+        "address": "42 Marine Lines, Fort",
+        "city": "Mumbai",
+        "country": "IN",
+        "account": "10294857361"
+    },
+    "beneficiary": {
+        "name": "Global Trading GmbH",
+        "address": "Hauptstrasse 88",
+        "city": "Hamburg",
+        "country": "DE",
+        "account": "DE89370400440532013000",
+        "bank_bic": "DEUTDEDBHAM"
+    },
+    "amount": 750000.00,
+    "currency": "USD",
+    "tolerance_pct": 5,
+    "payment_terms": "At Sight",
+    "confirmation": "Without",
+    "advising_bank": {
+        "name": "Deutsche Bank AG",
+        "bic": "DEUTDEDBHAM",
+        "address": "Grosse Gallusstrasse 10, Frankfurt 60272, Germany"
+    },
+    "shipment_details": {
+        "port_of_loading": "NHAVA SHEVA, INDIA",
+        "port_of_discharge": "HAMBURG, GERMANY",
+        "latest_shipment_date": "2025-07-15",
+        "partial_shipments": "NOT ALLOWED",
+        "transshipment": "NOT ALLOWED",
+        "incoterms": "CIF HAMBURG"
+    },
+    "goods_description": "5000 MT of Basmati Rice (Grade A), Long Grain, H.S. Code 1006.30. Packed in 50 kg jute bags, 100 bags per pallet. Free from foreign matter and insects. Country of origin: India.",
+    "documents_required": [
+        "Commercial Invoice in triplicate signed by beneficiary",
+        "Full set of Clean on Board Ocean Bill of Lading made out to order of Barclays Bank PLC, notify Applicant, marked Freight Prepaid",
+        "Packing List in triplicate",
+        "Certificate of Origin issued by Chamber of Commerce",
+        "Phytosanitary Certificate issued by competent authority",
+        "Weight/Quality Certificate issued by SGS or equivalent",
+        "Insurance Certificate for 110% of invoice value covering all risks"
+    ],
+    "additional_conditions": "All documents must be presented within 21 days after the date of shipment but within the credit validity. Documents presented after expiry date will not be honoured. Beneficiary must fax pre-shipment advice to applicant at least 5 days before shipment.",
+    "charges": "OUR",
+    "presentation_period_days": 21,
+    "instructions_to_bank": "Upon receipt of complying documents, please forward all originals to Barclays Bank PLC, Trade Finance Operations, 1 Churchill Place, London E14 5HP. Reimbursement will be made as per our standing instructions."
+}

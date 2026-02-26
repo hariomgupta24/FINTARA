@@ -1,0 +1,38 @@
+{
+    "_comment": "Example company data extracted from a Certificate of Incorporation document",
+    "valid_example": {
+        "company_name": "Tata Steel Ltd.",
+        "cin_number": "L27100MH1907PLC000260",
+        "registration_date": "1907-08-26",
+        "registered_address": "Bombay House, 24 Homi Mody Street, Fort, Mumbai, Maharashtra 400001",
+        "status": "ACTIVE"
+    },
+    "review_example": {
+        "company_name": "Infosys Technologies",
+        "cin_number": "U74999MH2010PLC123456",
+        "registration_date": "15-03-2010",
+        "registered_address": "Rajiv Gandhi Infotech Park, Pune",
+        "status": "ACTIVE"
+    },
+    "invalid_cin_example": {
+        "company_name": "Shadow Exports Pvt. Ltd.",
+        "cin_number": "U00000XX2023PTC999999",
+        "registration_date": "2023-01-01",
+        "registered_address": "123 Unknown Street, Delhi 110001",
+        "status": "ACTIVE"
+    },
+    "invalid_inactive_example": {
+        "company_name": "Novus Pharma Exports",
+        "cin_number": "U85110TG2021OPC445678",
+        "registration_date": "2021-04-05",
+        "registered_address": "Plot 88, IDA Nacharam, Hyderabad, Telangana 500076",
+        "status": "ACTIVE"
+    },
+    "invalid_missing_fields_example": {
+        "company_name": "Some Company",
+        "cin_number": "",
+        "registration_date": "",
+        "registered_address": "Delhi",
+        "status": "ACTIVE"
+    }
+}

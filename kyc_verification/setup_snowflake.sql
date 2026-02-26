@@ -1,0 +1,48 @@
+-- ============================================================
+--  Barclays KYC -- Snowflake Setup Script
+--  Run this once in your Snowflake worksheet to create
+--  the database, schema, table, and seed demo data.
+-- ============================================================
+
+-- 1. Create database and schema (skip if already exists)
+CREATE DATABASE IF NOT EXISTS BARCLAY_KYC_DB;
+USE DATABASE BARCLAY_KYC_DB;
+CREATE SCHEMA IF NOT EXISTS KYC;
+USE SCHEMA KYC;
+
+-- 2. Create warehouse (skip if already have one)
+CREATE WAREHOUSE IF NOT EXISTS COMPUTE_WH
+    WAREHOUSE_SIZE = 'X-SMALL'
+    AUTO_SUSPEND   = 60
+    AUTO_RESUME    = TRUE;
+
+-- 3. Create the COMPANY_REGISTRY table
+CREATE TABLE IF NOT EXISTS COMPANY_REGISTRY (
+    CIN                 VARCHAR(25)   NOT NULL PRIMARY KEY,
+    COMPANY_NAME        VARCHAR(255)  NOT NULL,
+    REGISTRATION_DATE   DATE          NOT NULL,
+    REGISTERED_ADDRESS  VARCHAR(500),
+    STATUS              VARCHAR(50)   NOT NULL DEFAULT 'ACTIVE'
+);
+
+-- 4. Seed with demo companies (matches company_registry.csv)
+INSERT INTO COMPANY_REGISTRY VALUES
+('U74999MH2010PLC123456', 'Infosys Technologies Ltd.',    '2010-03-15', 'Plot No. 44, Rajiv Gandhi Infotech Park, Hinjawadi, Pune, Maharashtra 411057', 'ACTIVE'),
+('U72200DL2005PLC987654', 'Bharat Heavy Electricals Ltd.','2005-07-01', 'BHEL House, Siri Fort, New Delhi 110049',                                      'ACTIVE'),
+('L27100MH1907PLC000260', 'Tata Steel Ltd.',              '1907-08-26', 'Bombay House, 24 Homi Mody Street, Fort, Mumbai, Maharashtra 400001',           'ACTIVE'),
+('U17100GJ2019PTC334567', 'Sunrise Textiles Pvt. Ltd.',   '2019-11-20', 'F-12, GIDC Industrial Estate, Sachin, Surat, Gujarat 394230',                   'ACTIVE'),
+('U85110TG2021OPC445678', 'Novus Pharma Exports',         '2021-04-05', 'Plot 88, IDA Nacharam, Hyderabad, Telangana 500076',                             'INACTIVE'),
+('U40100KA2015PLC556789', 'Wipro Ltd.',                   '2015-06-10', 'Doddakannelli, Sarjapur Road, Bengaluru, Karnataka 560035',                      'ACTIVE'),
+('U74140MH2018PTC667890', 'Reliance Industries Ltd.',     '2018-09-22', 'Maker Chambers IV, 222 Nariman Point, Mumbai, Maharashtra 400021',               'ACTIVE'),
+('U55100RJ2012PLC778901', 'Rajasthan Exports Co.',        '2012-02-14', 'B-45, Sitapura Industrial Area, Jaipur, Rajasthan 302022',                        'ACTIVE'),
+('U24200GJ2008PLC889012', 'Ahmedabad Chemicals Pvt. Ltd.','2008-05-30', '185, GIDC Estate, Vatva, Ahmedabad, Gujarat 382445',                              'STRIKE_OFF'),
+('U65910MH2000PLC990123', 'HDFC Bank Ltd.',               '2000-01-10', 'HDFC Bank House, Senapati Bapat Marg, Lower Parel, Mumbai, Maharashtra 400013',  'ACTIVE'),
+('U72100MH2003PLC101010', 'Mahindra and Mahindra Ltd.',   '2003-10-05', 'Gateway Building, Apollo Bunder, Mumbai, Maharashtra 400001',                    'ACTIVE'),
+('U30007PB2016PLC202020', 'Punjab Agro Industries Ltd.',  '2016-03-18', 'SCO 84-85, Sector 17-C, Chandigarh 160017',                                       'ACTIVE'),
+('U45200TN2014PLC303030', 'Chennai Auto Parts Ltd.',      '2014-07-25', 'No. 7, Industrial Estate, Guindy, Chennai, Tamil Nadu 600032',                    'ACTIVE'),
+('U29100DL2011PLC404040', 'Delhi Precision Engineering',  '2011-12-01', 'B-12, Lawrence Road Industrial Area, Delhi 110035',                               'ACTIVE'),
+('U51909WB2009PTC505050', 'Kolkata Trading House Pvt. Ltd.','2009-08-19','15 Ganesh Chandra Avenue, Kolkata, West Bengal 700013',                          'ACTIVE');
+
+-- 5. Verify
+SELECT COUNT(*) AS TOTAL_COMPANIES FROM COMPANY_REGISTRY;
+SELECT * FROM COMPANY_REGISTRY LIMIT 5;

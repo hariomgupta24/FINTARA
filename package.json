@@ -1,0 +1,19 @@
+{
+  "name": "barclay-lc-system",
+  "version": "1.0.0",
+  "description": "Barclays Bank — Letter of Credit Digital Processing System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "pdfkit": "^0.17.2",
+    "sqlite3": "^5.1.7"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

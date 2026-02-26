@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India D2C Health Snacking Landscape — Yodley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0a0e17;
+            --bg2: #111827;
+            --bg3: #1a2332;
+            --card: #1e293b;
+            --border: rgba(255, 255, 255, 0.06);
+            --glow: rgba(56, 189, 248, 0.25);
+            --t1: #f0f6fc;
+            --t2: #94a3b8;
+            --t3: #64748b;
+            --cyan: #38bdf8;
+            --blue: #3b82f6;
+            --purple: #a78bfa;
+            --green: #34d399;
+            --orange: #fb923c;
+            --red: #f43f5e;
+            --gold: #fbbf24;
+            --pink: #f472b6
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--t1);
+            overflow: hidden
+        }
+
+        .app {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh
+        }
+
+        /* STATS BAR */
+        .stats {
+            display: flex;
+            gap: 12px;
+            padding: 12px 20px;
+            background: rgba(10, 14, 23, 0.95);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0
+        }
+
+        .sc {
+            flex: 1;
+            background: linear-gradient(135deg, var(--card), rgba(30, 41, 59, 0.6));
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all .3s
+        }
+
+        .sc:hover {
+            border-color: var(--glow);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15)
+        }
+
+        .sc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            opacity: 0.7
+        }
+
+        .sc:nth-child(1)::before {
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent)
+        }
+
+        .sc:nth-child(2)::before {
+            background: linear-gradient(90deg, transparent, var(--green), transparent)
+        }
+
+        .sc:nth-child(3)::before {
+            background: linear-gradient(90deg, transparent, var(--purple), transparent)
+        }
+
+        .sc:nth-child(4)::before {
+            background: linear-gradient(90deg, transparent, var(--orange), transparent)
+        }
+
+        .sl {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--t3);
+            margin-bottom: 4px
+        }
+
+        .sv {
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .sc:nth-child(2) .sv {
+            background: linear-gradient(135deg, var(--green), #6ee7b7);
+            -webkit-background-clip: text;
+            background-clip: text
+        }
+
+        .sc:nth-child(3) .sv {
+            background: linear-gradient(135deg, var(--purple), #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text
+        }
+
+        .sc:nth-child(4) .sv {
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text
+        }
+
+        .ss {
+            font-size: 9px;
+            color: var(--t3);
+            margin-top: 2px
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            position: relative
+        }
+
+        /* MAP */
+        .map-wrap {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px
+        }
+
+        .map-wrap svg {
+            height: 100%;
+            max-width: 100%;
+            filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.05))
+        }
+
+        .map-title {
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            z-index: 5
+        }
+
+        .map-title h1 {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--t1)
+        }
+
+        .map-title p {
+            font-size: 9px;
+            color: var(--t2);
+            margin-top: 1px
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 8px;
+            left: 20px;
+            display: flex;
+            gap: 12px;
+            z-index: 5
+        }
+
+        .legend-i {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 8px;
+            color: var(--t3)
+        }
+
+        .legend-s {
+            width: 12px;
+            height: 8px;
+            border-radius: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.08)
+        }
+
+        /* STATE PATHS */
+        .sp {
+            fill: #141e2e;
+            stroke: rgba(56, 189, 248, 0.12);
+            stroke-width: 0.5;
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .sp:hover {
+            stroke: var(--cyan);
+            stroke-width: 1.5;
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4))
+        }
+
+        .sp.d1 {
+            fill: #162a42
+        }
+
+        .sp.d2 {
+            fill: #1a3d5c
+        }
+
+        .sp.d3 {
+            fill: #1e5078
+        }
+
+        .sp.d4 {
+            fill: #2563a0
+        }
+
+        .sp.active {
+            stroke: var(--cyan);
+            stroke-width: 2;
+            filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.5))
+        }
+
+        .sp.dim {
+            opacity: 0.3
+        }
+
+        /* MARKERS */
+        .mk {
+            cursor: pointer;
+            pointer-events: all;
+            transition: transform .2s
+        }
+
+        .mk:hover {
+            transform: scale(1.3)
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                r: 8;
+                opacity: .3
+            }
+
+            50% {
+                r: 13;
+                opacity: .1
+            }
+        }
+
+        .mg {
+            fill: var(--cyan);
+            opacity: .3;
+            animation: pulse 2s ease-in-out infinite
+        }
+
+        .md {
+            fill: var(--cyan);
+            stroke: #fff;
+            stroke-width: 0.8
+        }
+
+        .ms {
+            fill: var(--red);
+            stroke: #fff;
+            stroke-width: 0.7;
+            filter: drop-shadow(0 0 5px rgba(244, 63, 94, 0.6))
+        }
+
+        .yah {
+            font-size: 6px;
+            font-weight: 900;
+            fill: var(--red);
+            text-anchor: middle;
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 3px rgba(244, 63, 94, 0.5))
+        }
+
+        /* SIDE PANEL */
+        .side {
+            width: 380px;
+            background: var(--bg2);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow: hidden
+        }
+
+        .side-hdr {
+            padding: 16px 18px 12px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .side-hdr h2 {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--t1)
+        }
+
+        .side-hdr p {
+            font-size: 10px;
+            color: var(--t2);
+            margin-top: 2px
+        }
+
+        .side-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0
+        }
+
+        .side-body::-webkit-scrollbar {
+            width: 3px
+        }
+
+        .side-body::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px
+        }
+
+        /* STATE PORTAL VIEW */
+        .portal-header {
+            padding: 16px 18px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(26, 35, 50, 0.9));
+            border-bottom: 1px solid var(--border)
+        }
+
+        .portal-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 4px
+        }
+
+        .portal-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px
+        }
+
+        .portal-tag {
+            font-size: 8px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .tag-high {
+            background: rgba(244, 63, 94, 0.15);
+            color: var(--red);
+            border: 1px solid rgba(244, 63, 94, 0.25)
+        }
+
+        .tag-med {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(251, 191, 36, 0.25)
+        }
+
+        .tag-low {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(52, 211, 153, 0.25)
+        }
+
+        .tag-count {
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--cyan);
+            border: 1px solid rgba(56, 189, 248, 0.2)
+        }
+
+        .brand-section {
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .brand-section h4 {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--t3);
+            margin-bottom: 8px
+        }
+
+        .bi {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        .bi:last-child {
+            border-bottom: none
+        }
+
+        .bd {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 4px;
+            flex-shrink: 0
+        }
+
+        .bn {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--t1);
+            margin-bottom: 1px
+        }
+
+        .bn .yb {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--red), #fb7185);
+            color: #fff;
+            font-size: 7px;
+            font-weight: 800;
+            padding: 1px 5px;
+            border-radius: 3px;
+            margin-left: 5px;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            vertical-align: middle
+        }
+
+        .bcat {
+            display: inline-flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-top: 3px
+        }
+
+        .bcat span {
+            font-size: 8px;
+            padding: 1px 6px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--t3);
+            border: 1px solid rgba(255, 255, 255, 0.04)
+        }
+
+        .bdesc {
+            font-size: 10px;
+            color: var(--t2);
+            line-height: 1.4;
+            margin-top: 2px
+        }
+
+        .empty-s {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            color: var(--t3);
+            padding: 30px
+        }
+
+        .empty-s .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+            opacity: .5
+        }
+
+        .empty-s p {
+            font-size: 11px;
+            line-height: 1.5;
+            max-width: 240px
+        }
+
+        /* INSIGHT BAR */
+        .insight {
+            padding: 10px 20px;
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.9), var(--bg));
+            border-top: 1px solid var(--border);
+            flex-shrink: 0
+        }
+
+        .insight-c {
+            background: linear-gradient(135deg, rgba(26, 35, 50, 0.7), rgba(37, 99, 160, 0.06));
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 11px;
+            color: var(--t2);
+            line-height: 1.5;
+            position: relative
+        }
+
+        .insight-c::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            opacity: .3;
+            border-radius: 8px 8px 0 0
+        }
+
+        .insight-c strong {
+            color: var(--t1);
+            font-weight: 600
+        }
+
+        .hl-c {
+            color: var(--cyan);
+            font-weight: 600
+        }
+
+        .hl-r {
+            color: var(--red);
+            font-weight: 700
+        }
+
+        /* PRODUCT OVERLAP */
+        .overlap-bar {
+            margin-top: 8px;
+            padding: 12px 18px;
+            background: rgba(244, 63, 94, 0.04);
+            border-left: 2px solid var(--red);
+            border-radius: 0 6px 6px 0
+        }
+
+        .overlap-bar h4 {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: var(--red);
+            margin-bottom: 4px
+        }
+
+        .overlap-tags {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap
+        }
+
+        .overlap-tags span {
+            font-size: 8px;
+            padding: 2px 7px;
+            border-radius: 8px;
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--pink);
+            border: 1px solid rgba(244, 63, 94, 0.15)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <div class="stats">
+            <div class="sc">
+                <div class="sl">Market Size</div>
+                <div class="sv">$3.9B</div>
+                <div class="ss">Indian Health Snacking (2024)</div>
+            </div>
+            <div class="sc">
+                <div class="sl">CAGR (2024–2030)</div>
+                <div class="sv">7.75%</div>
+                <div class="ss">Projected growth rate</div>
+            </div>
+            <div class="sc">
+                <div class="sl">D2C Brands Mapped</div>
+                <div class="sv">40+</div>
+                <div class="ss">Across 14 states</div>
+            </div>
+            <div class="sc">
+                <div class="sl">Quick Commerce</div>
+                <div class="sv">2.3x</div>
+                <div class="ss">Faster than regular food delivery</div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="map-wrap">
+                <div class="map-title">
+                    <h1>India D2C Healthy Snacking Landscape</h1>
+                    <p>Brand HQs by state · Click a state for the full competitive portal</p>
+                </div>
+                <svg id="map" viewBox="60 50 500 560" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="gC" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(56,189,248,0.5)" />
+                            <stop offset="100%" stop-color="rgba(56,189,248,0)" />
+                        </radialGradient>
+                        <radialGradient id="gR" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="rgba(244,63,94,0.5)" />
+                            <stop offset="100%" stop-color="rgba(244,63,94,0)" />
+                        </radialGradient>
+                    </defs>
+                    <path id="JK" class="sp d1"
+                        d="M200,62L215,58L235,62L250,70L258,65L268,72L272,85L265,98L258,108L250,112L240,118L230,115L222,120L215,115L205,118L198,112L192,105L188,95L192,82L198,72Z"
+                        data-s="JK" />
+                    <path id="HP_s" class="sp"
+                        d="M240,118L250,112L258,108L265,115L270,122L265,132L258,138L250,135L242,138L235,132L230,125L235,120Z"
+                        data-s="HP" />
+                    <path id="PB" class="sp"
+                        d="M205,118L215,115L222,120L230,125L235,132L230,142L222,148L214,145L208,148L200,142L195,135L198,125Z"
+                        data-s="PB" />
+                    <path id="UK" class="sp"
+                        d="M258,138L265,132L272,128L282,132L290,140L285,150L278,155L270,152L262,155L255,148L250,142L255,138Z"
+                        data-s="UK" />
+                    <path id="HR" class="sp d1"
+                        d="M208,148L222,148L230,142L235,148L240,155L235,165L228,170L225,178L218,175L210,168L205,162L200,155Z"
+                        data-s="HR" />
+                    <path id="DL" class="sp d4" d="M235,155L242,155L248,160L245,168L238,170L232,165Z" data-s="DL" />
+                    <path id="UP" class="sp"
+                        d="M248,160L262,155L278,155L290,158L302,162L315,170L325,180L330,195L322,210L310,220L298,228L288,232L278,228L268,225L258,230L250,225L242,220L235,210L228,200L225,190L225,178L235,170L238,170L245,168Z"
+                        data-s="UP" />
+                    <path id="RJ" class="sp d2"
+                        d="M145,155L165,148L180,150L195,155L205,162L210,168L218,175L225,190L225,210L220,228L215,242L205,252L192,258L180,255L168,250L155,242L148,230L142,218L138,205L135,190L138,175L142,165Z"
+                        data-s="RJ" />
+                    <path id="BR" class="sp"
+                        d="M330,195L345,192L358,195L370,198L378,205L380,215L375,225L365,230L352,232L340,228L330,225L322,220L322,210Z"
+                        data-s="BR" />
+                    <path id="WB" class="sp d1"
+                        d="M378,205L388,202L395,208L398,218L400,232L398,248L395,262L390,278L385,292L378,300L372,305L368,298L365,285L362,272L360,258L358,245L360,235L365,230L375,225L380,215Z"
+                        data-s="WB" />
+                    <path id="JH" class="sp"
+                        d="M322,220L330,225L340,228L352,232L358,245L360,258L352,262L342,265L332,260L322,255L315,248L310,240L310,230L315,225Z"
+                        data-s="JH" />
+                    <path id="SK" class="sp" d="M380,185L388,182L395,188L395,198L388,202L380,198Z" data-s="SK" />
+                    <path id="AS" class="sp d1"
+                        d="M395,188L410,185L425,182L445,180L460,182L475,188L480,195L478,205L470,210L458,208L445,205L430,205L418,208L408,210L400,212L395,208L398,198Z"
+                        data-s="AS" />
+                    <path id="AR" class="sp"
+                        d="M445,165L458,160L472,162L485,168L498,172L505,180L498,188L485,192L475,188L460,182L445,180L435,178L430,172Z"
+                        data-s="AR" />
+                    <path id="NL" class="sp" d="M475,188L485,192L490,200L488,210L480,215L475,208L470,210L475,200Z"
+                        data-s="NL" />
+                    <path id="MN" class="sp" d="M470,210L480,215L482,225L478,235L470,238L465,230L462,222L465,215Z"
+                        data-s="MN" />
+                    <path id="MZ" class="sp"
+                        d="M458,235L465,230L470,238L468,250L465,262L458,268L452,260L450,248L452,240Z" data-s="MZ" />
+                    <path id="TR" class="sp" d="M445,238L452,240L455,250L452,262L445,265L440,258L438,248Z"
+                        data-s="TR" />
+                    <path id="ML" class="sp"
+                        d="M418,208L430,205L445,205L458,208L462,215L458,222L448,225L435,228L425,225L418,218Z"
+                        data-s="ML" />
+                    <path id="MP" class="sp d1"
+                        d="M215,242L225,235L235,230L250,225L258,230L268,238L280,242L295,245L310,248L315,258L310,272L305,285L295,292L282,295L270,292L258,290L248,292L238,288L228,282L220,275L212,268L205,258L210,248Z"
+                        data-s="MP" />
+                    <path id="CT" class="sp"
+                        d="M310,248L322,255L332,260L340,270L345,282L342,295L335,308L325,318L315,315L308,308L302,298L298,290L305,285L310,272Z"
+                        data-s="CT" />
+                    <path id="GJ" class="sp d2"
+                        d="M108,215L118,210L132,212L142,218L148,230L155,242L165,250L170,255L175,262L172,275L165,285L155,290L142,288L130,285L120,278L112,268L105,255L100,242L102,228Z"
+                        data-s="GJ" />
+                    <path id="MH" class="sp d4"
+                        d="M155,290L165,285L175,280L185,282L195,285L205,288L218,290L230,292L242,295L255,298L268,300L282,302L295,298L302,305L308,315L310,328L305,342L295,352L282,358L268,360L255,358L242,355L230,350L218,348L205,345L192,340L180,335L170,328L162,318L155,308L152,298Z"
+                        data-s="MH" />
+                    <path id="OD" class="sp"
+                        d="M332,260L342,265L352,262L360,258L362,272L365,285L368,298L365,310L358,322L348,330L338,335L328,332L318,328L310,322L310,310L315,300L320,288L325,278L330,268Z"
+                        data-s="OD" />
+                    <path id="TG" class="sp d2"
+                        d="M255,358L268,360L282,358L290,355L298,360L310,365L315,375L310,388L300,395L288,398L275,395L265,390L255,385L250,375L248,365Z"
+                        data-s="TG" />
+                    <path id="AP" class="sp"
+                        d="M268,360L282,358L295,352L305,342L310,328L318,328L328,332L338,335L348,340L352,352L350,365L345,378L338,390L328,400L318,408L308,412L300,410L310,398L315,388L315,375L310,365L298,360L290,355L282,358Z"
+                        data-s="AP" />
+                    <path id="KA" class="sp d4"
+                        d="M205,345L218,348L230,350L242,355L255,358L248,365L250,375L255,385L252,398L248,412L242,425L235,435L225,442L215,445L205,440L195,432L188,422L182,410L178,398L175,385L172,372L170,358L172,348L180,342L192,340Z"
+                        data-s="KA" />
+                    <path id="GA" class="sp" d="M170,358L178,355L182,362L180,372L175,378L168,375L165,368Z"
+                        data-s="GA" />
+                    <path id="KL" class="sp d1"
+                        d="M215,445L225,442L228,452L230,465L228,478L225,490L220,500L215,508L208,512L202,508L198,498L195,485L195,472L198,460L202,450Z"
+                        data-s="KL" />
+                    <path id="TN" class="sp d2"
+                        d="M225,442L235,435L242,425L248,412L252,398L258,405L268,412L278,418L288,425L295,435L298,448L295,462L290,475L282,485L272,492L260,495L248,492L238,485L230,475L228,465L228,452Z"
+                        data-s="TN" />
+                    <path id="DN" class="sp d1" d="M148,290L155,290L155,298L152,305L145,302L142,296Z" data-s="DN" />
+
+                    <!-- MARKERS -->
+                    <g class="mk" data-s="DL" transform="translate(240,152)">
+                        <circle class="mg" r="12" fill="url(#gR)" />
+                        <polygon class="ms"
+                            points="0,-6 1.8,-1.8 6.8,-1.8 2.8,1.2 4.2,6 0,3 -4.2,6 -2.8,1.2 -6.8,-1.8 -1.8,-1.8" />
+                        <text class="yah" x="0" y="-11">YOU ARE HERE</text>
+                    </g>
+                    <g class="mk" data-s="DL" transform="translate(242,165)">
+                        <circle class="mg" r="8" fill="url(#gC)" />
+                        <circle class="md" cx="-3" cy="0" r="2" />
+                        <circle class="md" cx="3" cy="0" r="2" />
+                    </g>
+                    <g class="mk" data-s="KA" transform="translate(218,412)">
+                        <circle class="mg" r="12" fill="url(#gC)" />
+                        <circle class="md" cx="-4" cy="-3" r="2" />
+                        <circle class="md" cx="3" cy="-3" r="2" />
+                        <circle class="md" cx="-4" cy="3" r="2" />
+                        <circle class="md" cx="3" cy="3" r="2" />
+                    </g>
+                    <g class="mk" data-s="MH" transform="translate(178,330)">
+                        <circle class="mg" r="11" fill="url(#gC)" />
+                        <circle class="md" cx="-4" cy="-3" r="2" />
+                        <circle class="md" cx="4" cy="-3" r="2" />
+                        <circle class="md" cx="-4" cy="3" r="2" />
+                        <circle class="md" cx="4" cy="3" r="2" />
+                    </g>
+                    <g class="mk" data-s="MH" transform="translate(202,348)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="-2" cy="0" r="2" />
+                        <circle class="md" cx="3" cy="0" r="2" />
+                    </g>
+                    <g class="mk" data-s="TG" transform="translate(280,378)">
+                        <circle class="mg" r="9" fill="url(#gC)" />
+                        <circle class="md" cx="-3" cy="0" r="2" />
+                        <circle class="md" cx="3" cy="0" r="2" />
+                    </g>
+                    <g class="mk" data-s="GJ" transform="translate(130,248)">
+                        <circle class="mg" r="9" fill="url(#gC)" />
+                        <circle class="md" cx="-3" cy="0" r="2" />
+                        <circle class="md" cx="3" cy="0" r="2" />
+                    </g>
+                    <g class="mk" data-s="JK" transform="translate(230,90)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="0" cy="0" r="2.5" />
+                    </g>
+                    <g class="mk" data-s="TN" transform="translate(268,430)">
+                        <circle class="mg" r="9" fill="url(#gC)" />
+                        <circle class="md" cx="-3" cy="0" r="2" />
+                        <circle class="md" cx="3" cy="0" r="2" />
+                    </g>
+                    <g class="mk" data-s="WB" transform="translate(385,258)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="0" cy="0" r="2.5" />
+                    </g>
+                    <g class="mk" data-s="RJ" transform="translate(180,210)">
+                        <circle class="mg" r="8" fill="url(#gC)" />
+                        <circle class="md" cx="-2" cy="0" r="2" />
+                        <circle class="md" cx="3" cy="0" r="2" />
+                    </g>
+                    <g class="mk" data-s="KL" transform="translate(210,480)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="0" cy="0" r="2.5" />
+                    </g>
+                    <g class="mk" data-s="HR" transform="translate(220,158)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="0" cy="0" r="2.5" />
+                    </g>
+                    <g class="mk" data-s="AS" transform="translate(440,195)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="0" cy="0" r="2.5" />
+                    </g>
+                    <g class="mk" data-s="MP" transform="translate(260,268)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="0" cy="0" r="2.5" />
+                    </g>
+                    <g class="mk" data-s="DN" transform="translate(148,296)">
+                        <circle class="mg" r="7" fill="url(#gC)" />
+                        <circle class="md" cx="0" cy="0" r="2.5" />
+                    </g>
+                </svg>
+                <div class="legend">
+                    <div class="legend-i">
+                        <div class="legend-s" style="background:#141e2e"></div>0
+                    </div>
+                    <div class="legend-i">
+                        <div class="legend-s" style="background:#162a42"></div>1
+                    </div>
+                    <div class="legend-i">
+                        <div class="legend-s" style="background:#1a3d5c"></div>2-3
+                    </div>
+                    <div class="legend-i">
+                        <div class="legend-s" style="background:#1e5078"></div>4-5
+                    </div>
+                    <div class="legend-i">
+                        <div class="legend-s" style="background:#2563a0"></div>6+
+                    </div>
+                    <div class="legend-i"><svg width="12" height="12" viewBox="-6 -6 12 12">
+                            <circle r="3" fill="var(--cyan)" />
+                        </svg> HQ</div>
+                    <div class="legend-i"><svg width="12" height="12" viewBox="-6 -6 12 12">
+                            <polygon
+                                points="0,-4 1.2,-1.2 4.5,-1.2 1.8,0.8 2.8,4 0,2 -2.8,4 -1.8,0.8 -4.5,-1.2 -1.2,-1.2"
+                                fill="var(--red)" />
+                        </svg> Yodley</div>
+                </div>
+            </div>
+            <div class="side" id="side">
+                <div class="side-hdr">
+                    <h2 id="sideTitle">State Portal</h2>
+                    <p id="sideSub">Click any state to explore its D2C brand ecosystem</p>
+                </div>
+                <div class="side-body" id="sideBody">
+                    <div class="empty-s">
+                        <div class="icon">🗺️</div>
+                        <p>Select a state on the map to view its complete D2C health snacking brand portal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="insight">
+            <div class="insight-c">💡 <strong>Bengaluru dominates India's D2C health food space</strong> with 7+ brands.
+                Delhi-NCR — India's largest consumer market — <span class="hl-c">has only 5 brands and limited
+                    millet-snack competition</span>. <span class="hl-r">Yodley has first-mover advantage in sprouted
+                    chillas & millet puffs in the North.</span></div>
+        </div>
+    </div>
+    <script>
+        const D = {
+            DL: {
+                name: "Delhi / NCR", city: "New Delhi & Gurgaon", threat: "HIGH", brands: [
+                    { n: "Yodley", d: "Sprouted chilla mixes, millet puffs, pancake mixes, peanut butter & hazelnut spreads — first-mover in North India", c: "#f43f5e", y: true, cats: ["Millet Snacks", "Peanut Butter", "Breakfast Mixes", "Spreads"] },
+                    { n: "Wingreens World", d: "Dips, spreads, sauces & healthy condiments — ₹350Cr+ revenue, acquired Rawpressery", c: "#38bdf8", cats: ["Spreads", "Condiments", "Sauces"] },
+                    { n: "Slurrp Farm", d: "Millet-based kids & adult snacks, pancake mixes, cereals — ₹80Cr rev, Series B funded", c: "#34d399", cats: ["Millet Snacks", "Breakfast Mixes", "Kids Food"] },
+                    { n: "Farmley", d: "Premium dry fruits, trail mixes, seeds — ₹200Cr+ rev, 25,000+ stores across 12 states", c: "#a78bfa", cats: ["Dry Fruits", "Trail Mixes", "Seeds"] },
+                    { n: "Let's Try Foods", d: "Traditional healthy snacks — flax seeds, makhana, roasted snacks", c: "#fb923c", cats: ["Traditional Snacks", "Seeds", "Makhana"] }
+                ], overlap: ["Millet Snacks", "Peanut Butter", "Breakfast Mixes", "Spreads"]
+            },
+            KA: {
+                name: "Karnataka (Bengaluru)", city: "Bengaluru", threat: "HIGH", brands: [
+                    { n: "Yogabar", d: "Protein bars, muesli, oats, peanut butter — acquired by ITC for ₹500Cr+", c: "#38bdf8", cats: ["Protein Bars", "Muesli", "Peanut Butter"] },
+                    { n: "Happilo", d: "Premium dry fruits, trail mixes, nut mixes — ₹500Cr+ revenue, market leader", c: "#34d399", cats: ["Dry Fruits", "Trail Mixes", "Nuts"] },
+                    { n: "The Whole Truth", d: "Clean-label protein bars, peanut butter, dark chocolates — ₹100Cr+ ARR", c: "#a78bfa", cats: ["Protein Bars", "Peanut Butter", "Chocolates"] },
+                    { n: "Soulfull (Tata)", d: "Millet-based ragi bites, muesli, cereals — acquired by Tata Consumer", c: "#fb923c", cats: ["Millet Snacks", "Cereals", "Breakfast"] },
+                    { n: "Nourish You", d: "Chia seeds, sunflower seeds, plant-based milk — organic & gluten-free focus", c: "#fbbf24", cats: ["Seeds", "Plant Milk", "Organic"] },
+                    { n: "WellBe Foods", d: "Healthy snack bars, expanding to 38,000+ stores pan-India by 2026", c: "#f472b6", cats: ["Snack Bars", "Healthy Snacks"] },
+                    { n: "Gladful", d: "High-protein, high-fibre cookies & snacks for kids — 'not-so-junk' food brand", c: "#38bdf8", cats: ["Kids Food", "Cookies", "Protein Snacks"] }
+                ], overlap: ["Millet Snacks", "Peanut Butter", "Protein Bars", "Breakfast Mixes"]
+            },
+            MH: {
+                name: "Maharashtra", city: "Mumbai & Pune", threat: "HIGH", brands: [
+                    { n: "Open Secret", d: "Healthy cookies, nutty bars & snacks — ₹100Cr+ revenue, backed by Rajan Anandan", c: "#38bdf8", cats: ["Cookies", "Snack Bars"] },
+                    { n: "OZiva", d: "Plant-based nutrition, protein powders & wellness — ₹200Cr+ revenue", c: "#34d399", cats: ["Protein", "Plant-Based", "Wellness"] },
+                    { n: "Epigamia", d: "Greek yogurt, plant-based dairy alternatives — ₹150Cr+ rev, Deepika Padukone backed", c: "#a78bfa", cats: ["Yogurt", "Dairy Alternatives"] },
+                    { n: "Snackible", d: "Better-for-you snack boxes & subscriptions — samosas, chips, puffs", c: "#fb923c", cats: ["Snack Boxes", "Chips", "Puffs"] },
+                    { n: "Two Brothers Organic", d: "Organic cold-pressed oils, honey, ghee — Pune, Shark Tank funded", c: "#fbbf24", cats: ["Organic", "Oils", "Honey"] },
+                    { n: "True Elements", d: "100% whole-grain granola, muesli, seeds, oats — Pune-based, ₹100Cr+ rev", c: "#f472b6", cats: ["Granola", "Muesli", "Seeds", "Oats"] }
+                ], overlap: ["Peanut Butter", "Snack Bars", "Millet Snacks"]
+            },
+            TG: {
+                name: "Telangana (Hyderabad)", city: "Hyderabad", threat: "MEDIUM", brands: [
+                    { n: "Troo Good", d: "Millet-based choco bars — by Genext Students, backed by ID Fresh Foods", c: "#38bdf8", cats: ["Millet Snacks", "Choco Bars"] },
+                    { n: "Too Yumm!", d: "Baked chips & snacks — RP-Sanjiv Goenka Group, ₹400Cr+ brand", c: "#34d399", cats: ["Baked Chips", "Snacks"] }
+                ], overlap: ["Millet Snacks"]
+            },
+            GJ: {
+                name: "Gujarat", city: "Ahmedabad & Surat", threat: "HIGH", brands: [
+                    { n: "Alpino Health Foods", d: "High-protein peanut butter, super muesli, oats — ₹80Cr+ rev, Surat", c: "#38bdf8", cats: ["Peanut Butter", "Muesli", "Oats"] },
+                    { n: "TagZ Foods", d: "Guilt-free popped potato chips — Shark Tank funded, rapid D2C growth", c: "#34d399", cats: ["Chips", "Popped Snacks"] },
+                    { n: "Pintola", d: "Natural & flavored peanut butters, almond butter — Ahmedabad-based, fast growing", c: "#a78bfa", cats: ["Peanut Butter", "Almond Butter", "Nut Butters"] }
+                ], overlap: ["Peanut Butter", "Millet Snacks", "Breakfast Mixes"]
+            },
+            JK: {
+                name: "Jammu & Kashmir", city: "Srinagar", threat: "LOW", brands: [
+                    { n: "Namhya Foods", d: "Ayurvedic superfoods, herbal teas, immunity boosters — Shark Tank funded, J&K origin", c: "#38bdf8", cats: ["Superfoods", "Herbal Teas", "Immunity"] }
+                ], overlap: []
+            },
+            TN: {
+                name: "Tamil Nadu", city: "Chennai & Coimbatore", threat: "MEDIUM", brands: [
+                    { n: "ID Fresh", d: "Fresh idli/dosa batter, parotas, filter coffee — ₹500Cr+ revenue, category creator", c: "#38bdf8", cats: ["Fresh Food", "Breakfast", "Batter"] },
+                    { n: "Nutty Yogi", d: "Traditional Indian superfoods — makhana, dry fruits, healthy snack mixes", c: "#34d399", cats: ["Traditional Snacks", "Dry Fruits", "Makhana"] },
+                    { n: "Monsoon Harvest", d: "Millet-based muesli & breakfast cereals — TN manufacturing, Punjab farm", c: "#a78bfa", cats: ["Millet Snacks", "Muesli", "Cereals"] }
+                ], overlap: ["Millet Snacks", "Breakfast Mixes"]
+            },
+            WB: {
+                name: "West Bengal (Kolkata)", city: "Kolkata", threat: "LOW", brands: [
+                    { n: "Bikano", d: "Traditional namkeen & snacks — expanding into healthy/baked variants segment", c: "#38bdf8", cats: ["Namkeen", "Traditional Snacks"] }
+                ], overlap: []
+            },
+            RJ: {
+                name: "Rajasthan", city: "Jaipur", threat: "MEDIUM", brands: [
+                    { n: "Omay Foods", d: "Rock-salt roasted seeds, trail mixes — traditional Rajasthani method, no oil/frying", c: "#38bdf8", cats: ["Roasted Seeds", "Trail Mixes"] },
+                    { n: "The Eat Better Co.", d: "Millet namkeen, dry-fruit laddoos (no added sugar), nut & seed mixes — Jaipur", c: "#34d399", cats: ["Millet Snacks", "Laddoos", "Nut Mixes"] }
+                ], overlap: ["Millet Snacks"]
+            },
+            KL: {
+                name: "Kerala", city: "Alappuzha", threat: "LOW", brands: [
+                    { n: "Beyond Snack", d: "Premium Kerala banana chips — Shark Tank funded, exports to 12 countries", c: "#38bdf8", cats: ["Banana Chips", "Traditional Snacks"] }
+                ], overlap: []
+            },
+            HR: {
+                name: "Haryana / NCR", city: "Gurgaon & Silvassa", threat: "MEDIUM", brands: [
+                    { n: "Yummiano", d: "Chemical-free healthy snacks — beetroot, ragi, quinoa chips with 70% less oil, Delhi-NCR", c: "#38bdf8", cats: ["Veggie Chips", "Millet Chips", "Healthy Snacks"] }
+                ], overlap: ["Millet Snacks"]
+            },
+            AS: {
+                name: "Assam", city: "Guwahati", threat: "LOW", brands: [
+                    { n: "Kishlay Foods", d: "Multi-category snacks & Assam teas — internet-first regional brand", c: "#38bdf8", cats: ["Snacks", "Tea"] }
+                ], overlap: []
+            },
+            MP: {
+                name: "Madhya Pradesh", city: "Indore", threat: "LOW", brands: [
+                    { n: "Local Millet Brands", d: "Multigrain puffs, roasted namkeen — Indore-based food processing cluster", c: "#38bdf8", cats: ["Millet Puffs", "Namkeen"] }
+                ], overlap: ["Millet Snacks", "Puffs"]
+            },
+            DN: {
+                name: "Dadra & Nagar Haveli", city: "Silvassa", threat: "LOW", brands: [
+                    { n: "MyFitness", d: "India's #1 D2C peanut butter brand — acquired by Mensa Brands for ₹100Cr+", c: "#38bdf8", cats: ["Peanut Butter"] }
+                ], overlap: ["Peanut Butter"]
+            }
+        };
+        const yodleyCats = ["Millet Snacks", "Peanut Butter", "Breakfast Mixes", "Spreads", "Millet Puffs"];
+        const paths = document.querySelectorAll('.sp');
+        const markers = document.querySelectorAll('.mk');
+        let active = null;
+        function sel(sid) {
+            paths.forEach(p => { p.classList.remove('active', 'dim') });
+            if (active === sid) { active = null; reset(); return }
+            active = sid;
+            const el = document.querySelector(`[data-s="${sid}"]`);
+            if (el) el.classList.add('active');
+            paths.forEach(p => { if (p.getAttribute('data-s') !== sid) p.classList.add('dim') });
+            const d = D[sid];
+            const t = document.getElementById('sideTitle');
+            const s = document.getElementById('sideSub');
+            const b = document.getElementById('sideBody');
+            if (!d) { t.textContent = el ? el.getAttribute('data-s') : '—'; s.textContent = ''; b.innerHTML = '<div class="empty-s"><div class="icon">📍</div><p>No D2C health snacking brands identified in this state yet</p></div>'; return }
+            t.textContent = d.name; s.textContent = d.city + ' · Click another state to compare';
+            let tc = d.threat === 'HIGH' ? 'tag-high' : d.threat === 'MEDIUM' ? 'tag-med' : 'tag-low';
+            let h = `<div class="portal-header"><h3>${d.name}</h3><div class="portal-meta"><span class="portal-tag ${tc}">Threat: ${d.threat}</span><span class="portal-tag tag-count">${d.brands.length} Brand${d.brands.length > 1 ? 's' : ''}</span></div></div>`;
+            h += `<div class="brand-section"><h4>Brands Headquartered Here</h4>`;
+            d.brands.forEach(br => {
+                const yb = br.y ? '<span class="yb">★ YOU ARE HERE</span>' : '';
+                const cats = br.cats ? br.cats.map(c => {
+                    const isOverlap = yodleyCats.includes(c) && !br.y;
+                    return `<span style="${isOverlap ? 'background:rgba(244,63,94,0.1);color:#fb7185;border-color:rgba(244,63,94,0.15)' : ''}">${c}${isOverlap ? ' ⚔️' : ''}</span>`;
+                }).join('') : '';
+                h += `<div class="bi"><div class="bd" style="background:${br.c};${br.y ? 'box-shadow:0 0 8px rgba(244,63,94,0.5)' : ''}"></div><div><div class="bn">${br.n}${yb}</div><div class="bdesc">${br.d}</div>${cats ? `<div class="bcat">${cats}</div>` : ''}</div></div>`;
+            });
+            h += `</div>`;
+            if (d.overlap && d.overlap.length > 0) {
+                h += `<div class="overlap-bar"><h4>⚔️ Categories overlapping with Yodley</h4><div class="overlap-tags">${d.overlap.map(o => `<span>${o}</span>`).join('')}</div></div>`;
+            }
+            b.innerHTML = h;
+        }
+        function reset() {
+            document.getElementById('sideTitle').textContent = 'State Portal';
+            document.getElementById('sideSub').textContent = 'Click any state to explore its D2C brand ecosystem';
+            document.getElementById('sideBody').innerHTML = '<div class="empty-s"><div class="icon">🗺️</div><p>Select a state on the map to view its complete D2C health snacking brand portal</p></div>';
+        }
+        paths.forEach(p => p.addEventListener('click', function () { sel(this.getAttribute('data-s')) }));
+        markers.forEach(m => m.addEventListener('click', function () { sel(this.getAttribute('data-s')) }));
+    </script>
+</body>
+
+</html>

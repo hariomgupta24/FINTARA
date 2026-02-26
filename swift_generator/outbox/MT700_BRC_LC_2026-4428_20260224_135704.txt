@@ -1,0 +1,43 @@
+{1:F01BARCGB22XXXX0000000000}{2:I700XXXXN}{3:{108:2602241357}}
+{4:
+:27:
+1/1
+:40A:
+IRREVOCABLE
+:20:
+BRC/LC/2026-4428
+:31C:
+260224
+:31D:
+251231HONG-KONG.
+:50:
+Acme Corp Test
+:59:
+//BJ210
+[J All bank charges outside Hong Kong for a/c of [J Applicant
+:32B:
+USD15048,00
+:39A:
+5/5
+:41A:
+WITH & SWIFT BIC BANK-OF CHINA. (SHANGHAI BRANCH), SWIFT: BKCHCNBJ210--
+BY PAYMENT AT SIGHT
+:43P:
+PERMITTED
+:43T:
+NOT ALLOWED
+:45A:
+100x Solar Panels 400W
+:46A:
++    1. Commercial Invoice
++    2. Bill of Lading
++    3. Packing List
++    4. Certificate of Origin
+:48:
+21 DAYS AFTER DATE OF SHIPMENT
+:49:
+WITHOUT
+:71B:
+OUR
+-}
+{5:{CHK:NONE00000000}}

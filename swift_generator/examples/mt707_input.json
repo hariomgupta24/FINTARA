@@ -1,0 +1,57 @@
+{
+    "message_type": "MT707",
+    "lc_number": "BRC/LC/2025/0001",
+    "issue_date": "2025-02-24",
+    "amendment_sequence": 1,
+    "amendment_date": "2025-04-10",
+    "amendments": [
+        "AMOUNT INCREASED FROM USD 750,000.00 TO USD 850,000.00",
+        "LATEST DATE OF SHIPMENT EXTENDED FROM 15 JULY 2025 TO 30 AUGUST 2025",
+        "EXPIRY DATE EXTENDED FROM 24 AUGUST 2025 TO 30 SEPTEMBER 2025",
+        "PARTIAL SHIPMENTS NOW PERMITTED"
+    ],
+    "amount": 850000.00,
+    "currency": "USD",
+    "expiry_date": "2025-09-30",
+    "expiry_place": "LONDON",
+    "applicant": {
+        "name": "Sunrise Exports Pvt Ltd",
+        "address": "42 Marine Lines, Fort",
+        "city": "Mumbai",
+        "country": "IN",
+        "account": "10294857361"
+    },
+    "beneficiary": {
+        "name": "Global Trading GmbH",
+        "address": "Hauptstrasse 88",
+        "city": "Hamburg",
+        "country": "DE",
+        "account": "DE89370400440532013000",
+        "bank_bic": "DEUTDEDBHAM"
+    },
+    "advising_bank": {
+        "name": "Deutsche Bank AG",
+        "bic": "DEUTDEDBHAM",
+        "address": "Grosse Gallusstrasse 10, Frankfurt 60272, Germany"
+    },
+    "shipment_details": {
+        "port_of_loading": "NHAVA SHEVA, INDIA",
+        "port_of_discharge": "HAMBURG, GERMANY",
+        "latest_shipment_date": "2025-08-30",
+        "partial_shipments": "PERMITTED",
+        "transshipment": "NOT ALLOWED"
+    },
+    "goods_description": "5000 MT of Basmati Rice (Grade A) — amended shipment schedule applies.",
+    "documents_required": [
+        "Commercial Invoice in triplicate signed by beneficiary",
+        "Full set of Clean on Board Ocean Bill of Lading",
+        "Packing List in triplicate",
+        "Certificate of Origin issued by Chamber of Commerce",
+        "Phytosanitary Certificate",
+        "Insurance Certificate for 110% of invoice value"
+    ],
+    "additional_conditions": "All other terms and conditions of the original LC remain unchanged. This amendment is effective upon receipt and acceptance by the beneficiary.",
+    "charges": "OUR",
+    "payment_terms": "At Sight",
+    "confirmation": "Without"
+}

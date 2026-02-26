@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barclays — LC Officer Dashboard</title>
+    <meta name="description"
+        content="Barclays Trade Finance Officer Dashboard — review, assess and action Letter of Credit applications." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="loc-officer.css" />
+</head>
+
+<body>
+
+    <!-- ===== Top Nav ===== -->
+    <nav class="topnav">
+        <div class="topnav-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="#00AEEF" opacity="0.15" />
+                    <path fill="currentColor"
+                        d="M20 5 C16.5 5 13.5 7 12 10 C10.5 8.5 8.5 8 6.5 9 C4.5 10 3.5 12 4 14 C2 13 0.5 14 0.5 16 C0.5 18 2 19.5 4 19 C4 21 5.5 23 7.5 24 C9.5 25 11.5 24 12.5 22.5 C13.5 25.5 16 27.5 19 28 L19 34 L17 34 C17 35 17.5 35.5 18 35.5 L22 35.5 C22.5 35.5 23 35 23 34 L21 34 L21 28 C24 27.5 26.5 25.5 27.5 22.5 C28.5 24 30.5 25 32.5 24 C34.5 23 36 21 36 19 C38 19.5 39.5 18 39.5 16 C39.5 14 38 13 36 14 C36.5 12 35.5 10 33.5 9 C31.5 8 29.5 8.5 28 10 C26.5 7 23.5 5 20 5Z"
+                        transform="scale(0.52) translate(5,3)" />
+                </svg>
+            </div>
+            <span class="brand-text">Barclays <span class="brand-highlight">Officer Portal</span></span>
+        </div>
+        <div class="topnav-center">
+            <div class="search-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input type="text" id="searchInput" placeholder="Search by applicant, ref#, or beneficiary…" />
+            </div>
+        </div>
+        <div class="topnav-right">
+            <div class="officer-badge">
+                <div class="officer-av">RM</div>
+                <div>
+                    <span class="officer-name">Riya Mehta</span>
+                    <span class="officer-role">Trade Finance Officer</span>
+                </div>
+            </div>
+            <a href="index.html" class="nav-link-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <path d="M19 12H5M12 5l-7 7 7 7" />
+                </svg>
+                AI Assistant
+            </a>
+            <a href="loc-client.html" class="nav-link-btn accent">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                New Application
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== Dashboard Layout ===== -->
+    <div class="dash-layout">
+
+        <!-- ===== Left: Application Queue ===== -->
+        <aside class="queue-panel">
+            <!-- Stats Row -->
+            <div class="stats-row" id="statsRow">
+                <div class="stat-card">
+                    <div class="stat-num" id="statTotal">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-card pending">
+                    <div class="stat-num" id="statPending">0</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+                <div class="stat-card approved">
+                    <div class="stat-num" id="statApproved">0</div>
+                    <div class="stat-label">Approved</div>
+                </div>
+                <div class="stat-card rejected">
+                    <div class="stat-num" id="statRejected">0</div>
+                    <div class="stat-label">Rejected</div>
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-tab active" data-filter="All">All</button>
+                <button class="filter-tab" data-filter="Pending Review">Pending</button>
+                <button class="filter-tab" data-filter="Under Review">Under Review</button>
+                <button class="filter-tab" data-filter="Approved">Approved</button>
+                <button class="filter-tab" data-filter="Rejected">Rejected</button>
+                <button class="filter-tab" data-filter="More Info Required">More Info</button>
+            </div>
+
+            <!-- Application Cards List -->
+            <div class="app-list" id="appList">
+                <!-- populated by JS -->
+            </div>
+        </aside>
+
+        <!-- ===== Right: Application Detail ===== -->
+        <main class="detail-panel" id="detailPanel">
+            <!-- Empty state -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                </div>
+                <h3>Select an Application</h3>
+                <p>Click on any application from the queue to review its full details, credit assessment, and take
+                    action.</p>
+            </div>
+
+            <!-- Detail Content (hidden until an app is selected) -->
+            <div class="detail-content" id="detailContent" style="display:none;">
+
+                <!-- Detail Header -->
+                <div class="detail-header">
+                    <div class="detail-header-left">
+                        <div class="ref-tag" id="dRef">BRC-LC-—</div>
+                        <div>
+                            <h2 id="dApplicantName">—</h2>
+                            <div class="detail-meta">
+                                <span id="dLcType" class="meta-badge"></span>
+                                <span id="dSubmittedAt" class="meta-date"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-header-right">
+                        <div class="status-pill" id="dStatusPill">Pending Review</div>
+                    </div>
+                </div>
+
+                <!-- Detail Tabs -->
+                <div class="detail-tabs" id="detailTabs">
+                    <button class="dtab active" data-tab="overview">Overview</button>
+                    <button class="dtab" data-tab="shipment">Shipment</button>
+                    <button class="dtab" data-tab="documents">Documents</button>
+                    <button class="dtab" data-tab="credit">Credit Assessment</button>
+                    <button class="dtab" data-tab="bank">Bank &amp; Payment</button>
+                    <button class="dtab stp-tab" data-tab="stp">STP Decision</button>
+                    <button class="dtab predraft-tab" data-tab="predraft">Pre-Draft LC</button>
+                    <button class="dtab finallc-tab" data-tab="finallc">Final LC</button>
+                    <button class="dtab swift-tab" data-tab="swift">SWIFT Gateway</button>
+                </div>
+
+                <!-- ── Tab: Overview ── -->
+                <div class="tab-content active" id="tabOverview">
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h4 class="ds-title">Applicant Information</h4>
+                            <div class="ds-rows" id="dApplicantRows"></div>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="ds-title">Beneficiary Information</h4>
+                            <div class="ds-rows" id="dBeneficiaryRows"></div>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="ds-title">LC Details</h4>
+                            <div class="ds-rows" id="dLCRows"></div>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="ds-title">Amount Summary</h4>
+                            <div class="amount-summary" id="dAmountSummary"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Tab: Shipment ── -->
+                <div class="tab-content" id="tabShipment">
+                    <div class="detail-grid">
+                        <div class="detail-section span-2">
+                            <h4 class="ds-title">Shipment Details</h4>
+                            <div class="ds-rows" id="dShipmentRows"></div>
+                        </div>
+                        <div class="detail-section span-2">
+                            <h4 class="ds-title">Goods Description</h4>
+                            <div class="goods-block" id="dGoods"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Tab: Documents ── -->
+                <div class="tab-content" id="tabDocuments">
+                    <div class="docs-required-list" id="dDocsList"></div>
+                    <div class="detail-section" style="margin-top:20px;">
+                        <h4 class="ds-title">Special Instructions</h4>
+                        <div class="special-instructions-box" id="dSpecialInstructions"></div>
+                    </div>
+                </div>
+
+                <!-- ── Tab: Credit Assessment ── -->
+                <div class="tab-content" id="tabCredit">
+                    <div class="credit-panel">
+                        <!-- Score Gauge -->
+                        <div class="officer-score-wrap">
+                            <div class="score-gauge">
+                                <svg viewBox="0 0 200 120" class="gauge-svg">
+                                    <path d="M20 110 A90 90 0 0 1 180 110" fill="none" stroke="rgba(255,255,255,0.06)"
+                                        stroke-width="16" stroke-linecap="round" />
+                                    <path id="gaugeArc" d="M20 110 A90 90 0 0 1 180 110" fill="none"
+                                        stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round"
+                                        stroke-dasharray="283" stroke-dashoffset="283" />
+                                    <defs>
+                                        <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#EF4444" />
+                                            <stop offset="50%" stop-color="#F59E0B" />
+                                            <stop offset="100%" stop-color="#22C55E" />
+                                        </linearGradient>
+                                    </defs>
+                                    <text x="100" y="95" text-anchor="middle" font-size="34" font-weight="800"
+                                        fill="white" id="gaugeScore">—</text>
+                                    <text x="100" y="114" text-anchor="middle" font-size="11" fill="#8DA2B5"
+                                        id="gaugeLabel">Credit Score</text>
+                                </svg>
+                            </div>
+                            <div class="score-verdict" id="scoreVerdict"></div>
+                        </div>
+
+                        <!-- Credit Breakdown -->
+                        <div class="credit-detail-grid">
+                            <div class="credit-detail-card">
+                                <div class="cdc-label">Annual Turnover</div>
+                                <div class="cdc-value" id="cdTurnover">—</div>
+                                <div class="cdc-desc">INR Crore</div>
+                            </div>
+                            <div class="credit-detail-card">
+                                <div class="cdc-label">CIBIL Score</div>
+                                <div class="cdc-value" id="cdCibil">—</div>
+                                <div class="cdc-desc">/ 900</div>
+                            </div>
+                            <div class="credit-detail-card">
+                                <div class="cdc-label">Years in Business</div>
+                                <div class="cdc-value" id="cdYears">—</div>
+                                <div class="cdc-desc">Years</div>
+                            </div>
+                            <div class="credit-detail-card">
+                                <div class="cdc-label">Existing Bank Limit</div>
+                                <div class="cdc-value" id="cdBankLimit">—</div>
+                                <div class="cdc-desc">INR Crore</div>
+                            </div>
+                        </div>
+
+                        <!-- Collateral -->
+                        <div class="detail-section" style="margin-top:20px;">
+                            <h4 class="ds-title">Collateral Offered</h4>
+                            <div class="collateral-chips" id="dCollateral"></div>
+                        </div>
+
+                        <!-- AI Recommendation -->
+                        <div class="ai-recommendation" id="dAiRecommendation"></div>
+
+                        <!-- LC Limit Suggestion -->
+                        <div class="lc-limit-box" id="dLcLimit"></div>
+                    </div>
+                </div>
+
+                <!-- ── Tab: Bank & Payment ── -->
+                <div class="tab-content" id="tabBank">
+                    <div class="detail-grid">
+                        <div class="detail-section span-2">
+                            <h4 class="ds-title">Bank Details</h4>
+                            <div class="ds-rows" id="dBankRows"></div>
+                        </div>
+                        <div class="detail-section span-2">
+                            <h4 class="ds-title">Payment Terms</h4>
+                            <div class="ds-rows" id="dPaymentRows"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Tab: STP Decision (Steps 6-11) ── -->
+                <div class="tab-content" id="tabStp">
+
+                    <!-- Step 6: KYC & Compliance Checks -->
+                    <div class="stp-section">
+                        <div class="stp-section-title">Step 6 — KYC &amp; Compliance Checks</div>
+                        <div class="compliance-grid">
+                            <div class="compliance-item">
+                                <div class="compliance-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    KYC / Identity Verification
+                                </div>
+                                <div class="compliance-toggle" id="ctKYC">
+                                    <button class="ct-btn" data-field="kyc" data-val="Cleared">Cleared</button>
+                                    <button class="ct-btn" data-field="kyc" data-val="Pending">Pending</button>
+                                    <button class="ct-btn" data-field="kyc" data-val="Failed">Failed</button>
+                                </div>
+                            </div>
+                            <div class="compliance-item">
+                                <div class="compliance-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                    </svg>
+                                    Sanctions — Applicant
+                                </div>
+                                <div class="compliance-toggle" id="ctSancApp">
+                                    <button class="ct-btn" data-field="sanctionsApplicant"
+                                        data-val="Cleared">Cleared</button>
+                                    <button class="ct-btn" data-field="sanctionsApplicant"
+                                        data-val="Pending">Pending</button>
+                                    <button class="ct-btn" data-field="sanctionsApplicant"
+                                        data-val="Alert">Alert</button>
+                                </div>
+                            </div>
+                            <div class="compliance-item">
+                                <div class="compliance-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <line x1="2" y1="12" x2="22" y2="12" />
+                                    </svg>
+                                    Sanctions — Beneficiary
+                                </div>
+                                <div class="compliance-toggle" id="ctSancBen">
+                                    <button class="ct-btn" data-field="sanctionsBeneficiary"
+                                        data-val="Cleared">Cleared</button>
+                                    <button class="ct-btn" data-field="sanctionsBeneficiary"
+                                        data-val="Pending">Pending</button>
+                                    <button class="ct-btn" data-field="sanctionsBeneficiary"
+                                        data-val="Alert">Alert</button>
+                                </div>
+                            </div>
+                            <div class="compliance-item">
+                                <div class="compliance-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                                    </svg>
+                                    AML Check (Temenos / Finastra)
+                                </div>
+                                <div class="compliance-toggle" id="ctAML">
+                                    <button class="ct-btn" data-field="aml" data-val="Cleared">Cleared</button>
+                                    <button class="ct-btn" data-field="aml" data-val="Pending">Pending</button>
+                                    <button class="ct-btn" data-field="aml" data-val="Failed">Failed</button>
+                                </div>
+                            </div>
+                            <div class="compliance-item">
+                                <div class="compliance-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    </svg>
+                                    Country Risk Assessment
+                                </div>
+                                <div class="compliance-toggle" id="ctCountry">
+                                    <button class="ct-btn" data-field="sanctionsCountryRisk" data-val="Cleared">Low
+                                        Risk</button>
+                                    <button class="ct-btn" data-field="sanctionsCountryRisk"
+                                        data-val="Pending">Pending</button>
+                                    <button class="ct-btn" data-field="sanctionsCountryRisk" data-val="High Risk">High
+                                        Risk</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="complianceClearedMsg" class="compliance-cleared-msg" style="display:none;">All
+                            compliance checks cleared. Application is eligible for STP processing.</div>
+                    </div>
+
+                    <!-- Steps 8-9: Collateral Valuation & Rule Engine -->
+                    <div class="stp-section">
+                        <div class="stp-section-title">Steps 8–9 — Collateral Valuation &amp; Rule Engine</div>
+                        <div class="collateral-valuation-grid" id="dCollateralValuation"></div>
+                        <button class="run-engine-btn" id="btnRunEngine" onclick="runDecisionEngine()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3" />
+                            </svg>
+                            Run STP Eligibility Engine
+                        </button>
+                    </div>
+
+                    <!-- Step 10: Decision Outcome -->
+                    <div class="stp-section">
+                        <div class="stp-section-title">Step 10 — STP Decision Outcome</div>
+                        <div class="stp-decision-result" id="dStpResult"></div>
+                    </div>
+
+                    <!-- Step 11: MT700 LC Draft -->
+                    <div class="stp-section">
+                        <div class="stp-section-title">Step 11 — MT700 LC Draft</div>
+                        <button class="mt700-btn" id="btnMT700" onclick="loadMT700()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                            </svg>
+                            Generate / View MT700 Draft
+                        </button>
+                        <pre class="mt700-preview" id="dMT700"></pre>
+                    </div>
+
+                </div>
+
+                <!-- ── Tab: Pre-Draft LC Generation ── -->
+                <div class="tab-content" id="tabPredraft">
+
+                    <!-- Header Banner -->
+                    <div class="predraft-header-banner">
+                        <div class="predraft-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="12" y1="11" x2="12" y2="17" />
+                                <line x1="9" y1="14" x2="15" y2="14" />
+                            </svg></div>
+                        <div>
+                            <div class="predraft-banner-title">Pre-Draft Letter of Credit Generator</div>
+                            <div class="predraft-banner-sub">UCP 600 Compliant · Automated Clause Generation · PDF
+                                Export</div>
+                        </div>
+                        <button class="predraft-gen-btn" id="btnGeneratePredraft" onclick="generatePreDraft()">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="12" y1="11" x2="12" y2="17" />
+                                <line x1="9" y1="14" x2="15" y2="14" />
+                            </svg>
+                            Generate Pre-Draft LC
+                        </button>
+                    </div>
+
+                    <!-- Validation Report -->
+                    <div class="predraft-section" id="predraftValidation" style="display:none;">
+                        <div class="predraft-section-title">Field Validation Report</div>
+                        <div class="predraft-field-grid" id="predraftFieldGrid"></div>
+                        <div class="predraft-warnings" id="predraftWarnings" style="display:none;"></div>
+                    </div>
+
+                    <!-- Error Panel -->
+                    <div class="predraft-error-panel" id="predraftErrorPanel" style="display:none;">
+                        <div class="predraft-error-title">Cannot Generate LC Draft</div>
+                        <div class="predraft-error-msg" id="predraftErrorMsg"></div>
+                        <div class="predraft-missing-list" id="predraftMissingList"></div>
+                    </div>
+
+                    <!-- Success Panel -->
+                    <div id="predraftSuccessPanel" style="display:none;">
+                        <!-- LC Metadata Row -->
+                        <div class="predraft-meta-row" id="predraftMetaRow"></div>
+
+                        <!-- Clauses Summary -->
+                        <div class="predraft-section" id="predraftClausesSection">
+                            <div class="predraft-section-title">Auto-Generated Clauses</div>
+                            <div class="predraft-clauses-grid" id="predraftClausesGrid"></div>
+                        </div>
+
+                        <!-- Fee Schedule -->
+                        <div class="predraft-section" id="predraftFeeSection">
+                            <div class="predraft-section-title">💰 LC Fee & Commission Schedule</div>
+                            <div class="predraft-fee-header" id="predraftFeeHeader"></div>
+                            <table class="predraft-fee-table" id="predraftFeeTable">
+                                <thead>
+                                    <tr>
+                                        <th>Fee Item</th>
+                                        <th>Rate</th>
+                                        <th>Currency</th>
+                                        <th class="fee-amt">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="predraftFeeBody"></tbody>
+                                <tfoot id="predraftFeeFoot"></tfoot>
+                            </table>
+                            <div class="predraft-fee-note" id="predraftFeeNote"></div>
+                        </div>
+
+                        <!-- Draft Text Viewer -->
+                        <div class="predraft-section">
+                            <div class="predraft-section-title"
+                                style="display:flex;align-items:center;justify-content:space-between;">
+                                <span>Full LC Pre-Draft Document</span>
+                                <div style="display:flex;gap:8px;">
+                                    <button class="predraft-copy-btn" onclick="copyDraftText()"
+                                        title="Copy to clipboard">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                        </svg>
+                                        Copy
+                                    </button>
+                                    <button class="predraft-pdf-btn" id="btnDownloadPDF" onclick="downloadLCPDF()">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="7 10 12 15 17 10" />
+                                            <line x1="12" y1="15" x2="12" y2="3" />
+                                        </svg>
+                                        Download PDF
+                                    </button>
+                                </div>
+                            </div>
+                            <pre class="predraft-draft-viewer" id="predraftDraftViewer"></pre>
+                        </div>
+                    </div>
+
+                    <!-- Initial empty state -->
+                    <div class="predraft-empty-state" id="predraftEmptyState">
+                        <div style="font-size:2.5rem;"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="12" y1="11" x2="12" y2="17" />
+                                <line x1="9" y1="14" x2="15" y2="14" />
+                            </svg></div>
+                        <h4>Pre-Draft LC Not Yet Generated</h4>
+                        <p>Click <strong>Generate Pre-Draft LC</strong> above to run the UCP 600 template engine.<br>The
+                            system will validate all mandatory fields, auto-generate clauses, and produce a print-ready
+                            PDF.</p>
+                    </div>
+
+                </div><!-- /tabPredraft -->
+
+                <!-- ── Tab: Final Letter of Credit ── -->
+                <div class="tab-content" id="tabFinallc">
+                    <div class="finallc-toolbar">
+                        <div>
+                            <div class="finallc-toolbar-title">Final Letter of Credit</div>
+                            <div class="finallc-toolbar-sub">Irrevocable · UCP 600 · Official Bank Instrument</div>
+                        </div>
+                        <button class="finallc-print-btn" onclick="printFinalLC()">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="6 9 6 2 18 2 18 9" />
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                <rect x="6" y="14" width="12" height="8" />
+                            </svg>
+                            Download / Print PDF
+                        </button>
+                    </div>
+
+                    <!-- The printable LC document -->
+                    <div class="finallc-doc-wrap">
+                        <div class="finallc-doc" id="finalLCDocument">
+
+                            <!-- Letterhead -->
+                            <div class="finallc-letterhead">
+                                <div class="finallc-logo-area">
+                                    <svg class="finallc-eagle" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#00AEEF" d="M100 10 C85 10 72 20 68 35 C62 28 54 25 46 28 C38 31 33 39 34 48
+                                            C26 44 18 46 13 53 C8 60 9 69 15 75 C8 79 5 88 9 96 C13 104 22 107 30 104
+                                            C30 113 35 121 43 124 C51 127 60 124 65 117 C70 128 80 135 92 136 L92 175
+                                            C88 176 84 180 84 185 L116 185 C116 180 112 176 108 175 L108 136
+                                            C120 135 130 128 135 117 C140 124 149 127 157 124 C165 121 170 113 170 104
+                                            C178 107 187 104 191 96 C195 88 192 79 185 75 C191 69 192 60 187 53
+                                            C182 46 174 44 166 48 C167 39 162 31 154 28 C146 25 138 28 132 35
+                                            C128 20 115 10 100 10Z" />
+                                    </svg>
+                                    <div class="finallc-bank-name">BARCLAYS BANK PLC</div>
+                                    <div class="finallc-bank-sub">Trade Finance Division · Global Transaction Banking
+                                    </div>
+                                    <div class="finallc-bank-addr">1 Churchill Place, Canary Wharf, London E14 5HP ·
+                                        SWIFT: BARCGB22</div>
+                                </div>
+                                <div class="finallc-lc-badge">IRREVOCABLE LETTER OF CREDIT</div>
+                            </div>
+
+                            <div class="finallc-rule"></div>
+
+                            <!-- LC Header Fields: 2-column grid -->
+                            <div class="finallc-header-grid">
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">LC Number</div>
+                                    <div class="finallc-hval" id="flc_number">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Date of Issue</div>
+                                    <div class="finallc-hval" id="flc_issue_date">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Issuing Bank</div>
+                                    <div class="finallc-hval" id="flc_issuing_bank">Barclays Bank PLC, London</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Type of Credit</div>
+                                    <div class="finallc-hval" id="flc_type">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Applicant</div>
+                                    <div class="finallc-hval" id="flc_applicant">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Beneficiary</div>
+                                    <div class="finallc-hval" id="flc_beneficiary">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Amount &amp; Currency</div>
+                                    <div class="finallc-hval finallc-amount" id="flc_amount">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Expiry Date &amp; Place</div>
+                                    <div class="finallc-hval" id="flc_expiry">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Advising Bank</div>
+                                    <div class="finallc-hval" id="flc_advising_bank">—</div>
+                                </div>
+                                <div class="finallc-hfield">
+                                    <div class="finallc-hlabel">Payment Terms</div>
+                                    <div class="finallc-hval" id="flc_payment_terms">—</div>
+                                </div>
+                            </div>
+
+                            <div class="finallc-rule"></div>
+
+                            <!-- Shipment Details -->
+                            <div class="finallc-section">
+                                <div class="finallc-section-title">SHIPMENT DETAILS</div>
+                                <div class="finallc-section-body" id="flc_shipment">—</div>
+                            </div>
+
+                            <!-- Description of Goods -->
+                            <div class="finallc-section">
+                                <div class="finallc-section-title">DESCRIPTION OF GOODS / SERVICES</div>
+                                <div class="finallc-section-body" id="flc_goods">—</div>
+                            </div>
+
+                            <!-- Documents Required -->
+                            <div class="finallc-section">
+                                <div class="finallc-section-title">DOCUMENTS REQUIRED</div>
+                                <div class="finallc-section-body" id="flc_documents">—</div>
+                            </div>
+
+                            <!-- Charges -->
+                            <div class="finallc-section">
+                                <div class="finallc-section-title">CHARGES</div>
+                                <div class="finallc-section-body" id="flc_charges">All banking charges outside the
+                                    issuing country are for the account of the Beneficiary. Charges within the issuing
+                                    country are for the account of the Applicant.</div>
+                            </div>
+
+                            <!-- Governing Rules -->
+                            <div class="finallc-section">
+                                <div class="finallc-section-title">GOVERNING RULES</div>
+                                <div class="finallc-section-body" id="flc_governing">This Letter of Credit is subject to
+                                    the Uniform Customs and Practice for Documentary Credits (UCP 600), International
+                                    Chamber of Commerce Publication No. 600 (2007 Revision), and where applicable, the
+                                    International Standard Banking Practice (ISBP 745).</div>
+                            </div>
+
+                            <!-- Bank Undertaking -->
+                            <div class="finallc-section finallc-undertaking">
+                                <div class="finallc-section-title">BANK UNDERTAKING</div>
+                                <div class="finallc-section-body" id="flc_undertaking">
+                                    Barclays Bank PLC hereby undertakes irrevocably to honour any complying presentation
+                                    made under this Letter of Credit, provided all terms and conditions stated herein
+                                    are strictly complied with. This undertaking is valid until the expiry date and
+                                    place specified above and constitutes a definitive engagement on behalf of Barclays
+                                    Bank PLC.
+                                </div>
+                            </div>
+
+                            <div class="finallc-rule"></div>
+
+                            <!-- Signature Block -->
+                            <div class="finallc-sigblock">
+                                <div class="finallc-sig-left">
+                                    <div class="finallc-sig-line"></div>
+                                    <div class="finallc-sig-name" id="flc_officer_name">Riya Mehta</div>
+                                    <div class="finallc-sig-role">Trade Finance Officer</div>
+                                    <div class="finallc-sig-role">Barclays Bank PLC</div>
+                                </div>
+                                <div class="finallc-stamp-wrap">
+                                    <!-- SVG Bank Stamp -->
+                                    <svg class="finallc-stamp" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="100" cy="100" r="95" fill="none" stroke="#00AEEF" stroke-width="4"
+                                            stroke-dasharray="6 3" />
+                                        <circle cx="100" cy="100" r="80" fill="none" stroke="#00AEEF"
+                                            stroke-width="1.5" />
+                                        <!-- Eagle -->
+                                        <path fill="#00AEEF" opacity="0.18" transform="translate(60,52) scale(0.4)" d="M100 10 C85 10 72 20 68 35 C62 28 54 25 46 28 C38 31 33 39 34 48
+                                            C26 44 18 46 13 53 C8 60 9 69 15 75 C8 79 5 88 9 96 C13 104 22 107 30 104
+                                            C30 113 35 121 43 124 C51 127 60 124 65 117 C70 128 80 135 92 136 L92 175
+                                            C88 176 84 180 84 185 L116 185 C116 180 112 176 108 175 L108 136
+                                            C120 135 130 128 135 117 C140 124 149 127 157 124 C165 121 170 113 170 104
+                                            C178 107 187 104 191 96 C195 88 192 79 185 75 C191 69 192 60 187 53
+                                            C182 46 174 44 166 48 C167 39 162 31 154 28 C146 25 138 28 132 35
+                                            C128 20 115 10 100 10Z" />
+                                        <!-- Curved top text -->
+                                        <path id="stampArcTop" d="M 22,100 A 78,78 0 0,1 178,100" fill="none" />
+                                        <text font-size="12" font-weight="700" fill="#00AEEF"
+                                            font-family="Arial,sans-serif" letter-spacing="3">
+                                            <textPath href="#stampArcTop" startOffset="8%">BARCLAYS BANK PLC ·
+                                                AUTHORISED</textPath>
+                                        </text>
+                                        <!-- Curved bottom text -->
+                                        <path id="stampArcBot" d="M 22,100 A 78,78 0 0,0 178,100" fill="none" />
+                                        <text font-size="10" font-weight="600" fill="#00AEEF"
+                                            font-family="Arial,sans-serif" letter-spacing="2">
+                                            <textPath href="#stampArcBot" startOffset="14%">TRADE FINANCE DIVISION ·
+                                                LONDON</textPath>
+                                        </text>
+                                        <!-- Centre text -->
+                                        <text x="100" y="97" text-anchor="middle" font-size="9" fill="#00AEEF"
+                                            font-family="Arial,sans-serif" font-weight="600">SWIFT: BARCGB22</text>
+                                        <text x="100" y="110" text-anchor="middle" font-size="7.5" fill="#00AEEF"
+                                            font-family="Arial,sans-serif">UCP 600 COMPLIANT</text>
+                                    </svg>
+                                </div>
+                                <div class="finallc-sig-right">
+                                    <div class="finallc-sig-line"></div>
+                                    <div class="finallc-sig-name">Head of Trade Finance</div>
+                                    <div class="finallc-sig-role">Authorised Signatory</div>
+                                    <div class="finallc-sig-role">Barclays Bank PLC</div>
+                                </div>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="finallc-footer">
+                                <div>This is an electronically generated official instrument of Barclays Bank PLC. Ref:
+                                    <span id="flc_ref">—</span>
+                                </div>
+                                <div>Generated: <span id="flc_gen_date">—</span> · Barclays Bank PLC is authorised by
+                                    the Prudential Regulation Authority and regulated by the Financial Conduct Authority
+                                    and the Prudential Regulation Authority.</div>
+                            </div>
+
+                        </div><!-- /finallc-doc -->
+                    </div><!-- /finallc-doc-wrap -->
+                </div><!-- /tabFinallc -->
+
+                <!-- ── Tab: SWIFT Gateway ── -->
+                <div class="tab-content" id="tabSwift">
+                    <div class="swift-gateway-header">
+                        <div class="swift-header-left">
+                            <div class="swift-header-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="2" y1="12" x2="22" y2="12" />
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                </svg></div>
+                            <div>
+                                <div class="swift-header-title">SWIFT Global Financial Messaging</div>
+                                <div class="swift-header-sub">Network Simulation Gateway · MT700 / MT707</div>
+                            </div>
+                        </div>
+                        <div class="swift-header-right">
+                            <button class="swift-gen-btn" id="btnGenSwift" onclick="generateSWIFTDraft()">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Generate SWIFT Draft
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SWIFT Status Box -->
+                    <div class="swift-status-box">
+                        <div class="swift-status-label">MESSAGE STATUS</div>
+                        <div class="swift-status-indicator idle" id="swiftStatusLed">AWAITING GENERATION</div>
+                    </div>
+
+                    <!-- Validation Errors Panels -->
+                    <div class="swift-error-panel" id="swiftErrorPanel" style="display:none;">
+                        <div class="swift-error-title">SWIFT Generation Failed</div>
+                        <ul class="swift-error-list" id="swiftErrorList"></ul>
+                    </div>
+
+                    <!-- SWIFT Viewport -->
+                    <div class="swift-terminal" id="swiftTerminal" style="display:none;">
+                        <div class="swift-terminal-header">
+                            <div>TERMINAL: BARCGB22</div>
+                            <div>LOC: LONDON</div>
+                            <div>MSG: <span id="swiftMsgType">MT700</span></div>
+                            <div id="swiftTimestamp"></div>
+                        </div>
+                        <pre class="swift-message-text" id="swiftMessageText"></pre>
+                        <div class="swift-terminal-footer">
+                            END OF MESSAGE
+                        </div>
+                    </div>
+
+                    <!-- Authentication / Transmission -->
+                    <div class="swift-auth-box" id="swiftAuthBox" style="display:none;">
+                        <div class="swift-auth-title">Dispatch Control</div>
+                        <div class="swift-auth-note" id="swiftAuthNote">Awaiting Transmission</div>
+                        <button class="swift-transmit-btn" id="btnTransmitSwift" onclick="simulateSWIFTTransmit()">Send
+                            to Advising Bank (Simulate SWIFT)</button>
+                    </div>
+
+                </div><!-- /tabSwift -->
+
+                <div class="action-panel" id="actionPanel">
+                    <div class="action-left">
+                        <div class="action-label">Officer Action</div>
+                        <div class="action-btns">
+                            <button class="action-btn approve" id="btnApprove" onclick="takeAction('Approved')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Approve
+                            </button>
+                            <button class="action-btn review" id="btnReview" onclick="takeAction('Under Review')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" y1="8" x2="12" y2="12" />
+                                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                                </svg>
+                                Under Review
+                            </button>
+                            <button class="action-btn info" id="btnInfo" onclick="takeAction('More Info Required')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                </svg>
+                                Request Info
+                            </button>
+                            <button class="action-btn reject" id="btnReject" onclick="takeAction('Rejected')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                                Reject
+                            </button>
+                        </div>
+                    </div>
+                    <div class="action-right">
+                        <label for="officerNotes">Officer Notes</label>
+                        <textarea id="officerNotes" rows="2"
+                            placeholder="Add internal notes, conditions, or reasons…"></textarea>
+                        <button class="save-notes-btn" id="btnSaveNotes" onclick="saveNotes()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                                <polyline points="17 21 17 13 7 13 7 21" />
+                                <polyline points="7 3 7 8 15 8" />
+                            </svg>
+                            Save Note
+                        </button>
+                    </div>
+                </div>
+
+
+            </div><!-- /detail-content -->
+        </main>
+    </div>
+
+    <!-- ===== Action Toast ===== -->
+    <div class="toast-notification" id="actionToast" style="display:none;"></div>
+
+    <script src="loc-officer.js"></script>
+</body>
+
+</html>

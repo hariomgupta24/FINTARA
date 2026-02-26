@@ -1,0 +1,69 @@
+{1:F01BARCGB22XXXX0000000000}{2:I700DEUTDEDBHAMXXXXN}{3:{108:2602241130}}
+{4:
+:27:
+1/1
+:40A:
+IRREVOCABLE
+:20:
+BRC/LC/2025/0001
+:31C:
+250224
+:31D:
+250824LONDON
+:50:
+//10294857361
+Sunrise Exports Pvt Ltd
+42 Marine Lines, Fort
+Mumbai/IN
+:59:
+//DE89370400440532013000
+Global Trading GmbH
+Hauptstrasse 88
+Hamburg/DE
+:32B:
+USD750000,00
+:39A:
+5/5
+:41A:
+WITH DEUTSCHE BANK AG
+BY PAYMENT AT SIGHT
+:43P:
+NOT ALLOWED
+:43T:
+NOT ALLOWED
+:44A:
+NHAVA SHEVA, INDIA
+:44B:
+HAMBURG, GERMANY
+:44C:
+250715
+:45A:
+5000 MT of Basmati Rice (Grade A), Long Grain, H.S. Code 1006.30.
+Packed in 50 kg jute bags, 100 bags per pallet. Free from foreign
+matter and insects. Country of origin: India.
+:46A:
++    1. Commercial Invoice in triplicate signed by beneficiary
++    2. Full set of Clean on Board Ocean Bill of Lading made out to order of Barclays Bank PLC, notify Applicant, marked Freight Prepaid
++    3. Packing List in triplicate
++    4. Certificate of Origin issued by Chamber of Commerce
++    5. Phytosanitary Certificate issued by competent authority
++    6. Weight/Quality Certificate issued by SGS or equivalent
++    7. Insurance Certificate for 110% of invoice value covering all risks
+:47A:
+All documents must be presented within 21 days after the date of
+shipment but within the credit validity. Documents presented
+after expiry date will not be honoured. Beneficiary must fax pre-
+shipment advice to applicant at least 5 days before shipment.
+:48:
+21 DAYS AFTER DATE OF SHIPMENT
+:49:
+WITHOUT
+:71B:
+OUR
+:78:
+Upon receipt of complying documents, please forward all originals
+to Barclays Bank PLC, Trade Finance Operations, 1 Churchill
+Place, London E14 5HP. Reimbursement will be made as per our
+standing instructions.
+-}
+{5:{CHK:NONE00000000}}
